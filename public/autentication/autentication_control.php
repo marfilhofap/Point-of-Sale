@@ -1,7 +1,7 @@
 <?php
 include_once 'connection.php';
 // include_once '../../config/parametros_db.php';
-include_once '/xampp/htdocs/posls1/config/parametros_db.php';
+include_once '/xampp/htdocs/Point-of-Sale/config/parametros_db.php';
 
 class ControloAutenticacao
 {

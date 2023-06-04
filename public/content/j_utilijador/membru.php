@@ -87,7 +87,7 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#hamos_identidade').on('show.bs.modal', function(event) {
+        $('#hamos_identidade').on('show.modal', function(event) {
             var button = $(event.relatedTarget)
             var id_identidade_pessoal = button.data('id_identidade_pessoal')
             var naran_kompletu = button.data('naran_kompletu')
@@ -98,7 +98,7 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 
         })
 
-        $('#ativu_utilijador').on('show.bs.modal', function(event) {
+        $('#ativu_utilijador').on('show.modal', function(event) {
             var button = $(event.relatedTarget)
             var a_id_identidade_pessoal = button.data('id_identidade_pessoal')
             var a_naran = button.data('naran_kompletu')
@@ -108,14 +108,13 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 
         })
 
-        $('#dejativu_utilijador').on('show.bs.modal', function(event) {
-            // var button = $(event.relatedTarget)
-            // var d_id_identidade_pessoal = button.data('id_identidade_pessoal')
-            // var d_naran = button.data('naran_kompletu')
-            // var modal = $(this)
-            // modal.find('#d_id_identidade_pessoal').val(d_id_identidade_pessoal)
-            // modal.find('#d_naran').text(d_naran)
-            alert('aaaa');
+        $('#dejativu_utilijador').on('show.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var d_id_identidade_pessoal = button.data('id_identidade_pessoal')
+            var d_naran = button.data('naran_kompletu')
+            var modal = $(this)
+            modal.find('#d_id_identidade_pessoal').val(d_id_identidade_pessoal)
+            modal.find('#d_naran').text(d_naran)
 
         })
     })

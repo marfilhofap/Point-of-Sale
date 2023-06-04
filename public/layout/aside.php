@@ -114,7 +114,7 @@
                 <?php
                 foreach ($jestaun_sira as $loop) {
                     if ($loop['id_jestaun'] == '2011508b-bd6d-4bbb-81f0-e9e09e90d613') { ?>
-                        <li class="<?= $_GET['c'] == 'membru' || $_GET['c'] == 'utilijador' || $_GET['c'] == 'utilijador_detallu' || $_GET['c'] == 'pozisaun' ? 'mm-active' : '' ?>">
+                        <li class="<?= $_GET['c'] == 'membru' || $_GET['c'] == 'utilijador' || $_GET['c'] == 'pozisaun' ? 'mm-active' : '' ?>">
                             <a href="#">
                                 <i class="metismenu-icon pe-7s-user"></i>
                                 Utilijador

@@ -14,11 +14,6 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
                 </div>
             </div>
         </div>
-        <div class="page-title-actions">
-            <button type="button" class="btn-shadow mr-3 btn btn-primary text-white" data-toggle="modal" data-target="#aumenta_identidade">
-                Aumenta <i class="fa fa-plus"></i>
-            </button>
-        </div>
     </div>
 </div>
 

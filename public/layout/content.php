@@ -35,12 +35,6 @@ switch ($content) {
     case 'membru':
         include __DIR__ . '/../content/j_utilijador/membru.php';
         break;
-    case 'utilijador':
-        include __DIR__ . '/../content/j_utilijador/utilijador.php';
-        break;
-    case 'utilijador_detallu':
-        include __DIR__ . '/../content/j_utilijador/utilijador_detallu.php';
-        break;
     case 'pozisaun':
         include __DIR__ . '/../content/j_utilijador/pozisaun.php';
         break;

@@ -8,16 +8,11 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
                 <i class="pe-7s-user icon-gradient bg-mean-fruit">
                 </i>
             </div>
-            <div>Membru Love Story
+            <div>Relatorio Jeral
                 <div class="page-title-subheading">
-                    <?= 'Total Membru nain ' . count($identificacao) . ' iha Love Story' ?>
+                    Relatorio bele hare tuir Diario, Semanal no Anual
                 </div>
             </div>
-        </div>
-        <div class="page-title-actions">
-            <button type="button" class="btn-shadow mr-3 btn btn-primary text-white" data-toggle="modal" data-target="#aumenta_identidade">
-                Aumenta <i class="fa fa-plus"></i>
-            </button>
         </div>
     </div>
 </div>
@@ -25,15 +20,6 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 <div class="row">
     <div class="col-xl-12 col-lg-7">
         <div class="card shadow mb-4">
-            <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Membru</h6>
-                <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#aumenta_identidade">
-                    <span class="text">Aumenta</span>
-                    <span class="icon text-white-50">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                </a>
-            </div> -->
             <div class="card-body">
 
                 <div class="table-responsive">

@@ -28,46 +28,46 @@ $pozisaun = $get_table->get_table("pozisaun order by pozisaun ASC");
         <div class="card shadow mb-4">
             <div class="card-body">
 
-            <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Pozisaun</th>
-                                    <th>Jestaun</th>
-                                    <th class="text-center">Asaun</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($pozisaun as $loop) {
-                                    $jestaun = $get_table->get_table_uuid("", "view_nivel_asesu_utilijador", "id_pozisaun", $loop['id_pozisaun'], "order by jestaun");
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Pozisaun</th>
+                                <th>Jestaun</th>
+                                <!-- <th class="text-center">Asaun</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            foreach ($pozisaun as $loop) {
+                                $jestaun = $get_table->get_table_uuid("", "view_nivel_asesu_utilijador", "id_pozisaun", $loop['id_pozisaun'], "order by jestaun");
 
-                                    echo '<tr>
+                                echo '<tr>
                                         <td>' . $no++ . '</td>     
                                         <td>' .  $loop['pozisaun'] . '</td>
                                         <td>';
-                                        foreach ($jestaun as $loops) {
-                                            echo  '- '.$loops['jestaun'].'<br>';
-                                        }
-                                        echo '</td>
-                                            <td>
-                                                <div class="d-flex justify-content-center flex-shrink-0">
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" target="_blank">
-                                                        <i class="fas fa-pen"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_pozisaun" data-id_pozisaun="' . $loop['id_pozisaun'] . '" data-pozisaun="' . $loop['pozisaun'] . '">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>';
+                                foreach ($jestaun as $loops) {
+                                    echo  '- ' . $loops['jestaun'] . '<br>';
                                 }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                // echo '</td>
+                                //             <td>
+                                //                 <div class="d-flex justify-content-center flex-shrink-0">
+                                //                     <a href="#" class="btn btn-sm btn-light btn-active-primary" target="_blank">
+                                //                         <i class="fas fa-pen"></i>
+                                //                     </a>
+                                //                     <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_pozisaun" data-id_pozisaun="' . $loop['id_pozisaun'] . '" data-pozisaun="' . $loop['pozisaun'] . '">
+                                //                         <i class="fas fa-trash"></i>
+                                //                     </a>
+                                //                 </div>
+                                //             </td>';
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
