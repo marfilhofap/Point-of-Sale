@@ -51,6 +51,38 @@ class j_membru
         return header("location: ../index.php?c=produtu_sira&id=$id_kategoria");
     }
 
+    public function edit_produtu($id_produtu, $id_kategoria, $naran_produtu, $folin, $binariu, $naran_img, $tipu, $tamanhu)
+    {
+
+        $sql1 = "UPDATE produtu SET naran_produtu = '$naran_produtu', folin='$folin' WHERE id_produtu = '$id_produtu'";
+
+        $this->conn->exec($sql1);
+
+        $sql = "SELECT * from imajem where id_ligasaun = '$id_produtu'";
+        $check = $this->conn->prepare($sql);
+        $check->execute();
+        $resultadu = $check->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($resultadu) > 0) {
+            $sql2 = "UPDATE imajem SET binariu = '$binariu', naran_img='$naran_img', tipu = '$tipu', tamanhu='$tamanhu' WHERE id_ligasaun = '$id_produtu'";
+
+            $this->conn->exec($sql2);
+        } else {
+            $sql3 = $this->conn->prepare("INSERT INTO imajem (binariu, naran_img, tipu, tamanhu, id_ligasaun) 
+                VALUES (:binariu, :naran_img, :tipu, :tamanhu, :id_ligasaun)");
+            $sql3->bindParam(":binariu", $binariu);
+            $sql3->bindParam(":naran_img", $naran_img);
+            $sql3->bindParam(":tipu", $tipu);
+            $sql3->bindParam(":tamanhu", $tamanhu);
+            $sql3->bindParam(":id_ligasaun", $id_produtu);
+            $sql3->execute();
+        }
+
+
+
+        return header("location: ../index.php?c=produtu_sira&id=$id_kategoria");
+    }
+
 
     // Identificacao
     public function aumenta_identidade($naran_kompletu, $sexo, $id_pozisaun, $data_moris, $email, $nu_telemovel, $id_membru)
@@ -175,10 +207,36 @@ class j_membru
 
                 $this->delete('transaksaun', 'id_transaksaun', $loop['id_transaksaun']);
             }
-
         } else {
             var_dump('la_susesu');
         }
         return header("location: ../index.php?c=resibu");
+    }
+
+    // Gastu kada Loron
+    public function aumenta_gastu_kada_loron($osan_sai, $data, $id_identidade_pessoal)
+    {
+
+        $sql = "SELECT * from gastu_kada_loron where data='$data'";
+        $check = $this->conn->prepare($sql);
+        $check->execute();
+        $resultadu = $check->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($resultadu) < 1) {
+            $que = $this->conn->prepare("INSERT into gastu_kada_loron (data, total_gastu, id_identidade_pessoal) 
+                        VALUES (data, :total_gastu, :id_identidade_pessoal)");
+
+            $que->bindParam(":total_gastu", $osan_sai);
+            $que->bindParam(":data", $data);
+            $que->bindParam(":id_identidade_pessoal", $id_identidade_pessoal);
+
+
+            $que->execute();
+        } else {
+            $sql = "UPDATE gastu_kada_loron SET total_gastu = '$osan_sai' WHERE data = '$data'";
+
+            $this->conn->exec($sql);
+        }
+        return header("location: ../index.php?c=relatorio_jeral");
     }
 }

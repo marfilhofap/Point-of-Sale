@@ -7,11 +7,11 @@ if ($get == 'produtu_sira') {
 ?>
 
     <!-- Modal Aumenta -->
-    <div class="modal fade" id="aumenta_kategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="aumenta_produtu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Aumenta Kategoria</h5>
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Aumenta Produtu</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -45,6 +45,60 @@ if ($get == 'produtu_sira') {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
                         <button type="submit" class="btn btn-success" name="aumenta_produtu">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="edit_produtu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Edit Produtu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="naran_produtu">Kategoria:</label>
+                                    <input type="text" class="form-control" id="kategoria_js" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="hidden" name="action" value="haruka" />
+                                    <label for="file" class="form-label required text-active-danger">Imajem</label>
+                                    <input class="form-control" type="file" id="file" name="file">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="naran_produtu">Naran:</label>
+                                    <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu">
+                                    <input type="hidden" class="form-control" id="id_produtu_js" name="id_produtu">
+                                    <input type="hidden" class="form-control" id="id_kategoria_js" name="id_kategoria">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="folin">Folin:</label>
+                                    <input type="text" class="form-control" id="folin_js" name="folin">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="edit_produtu">Rai</button>
                     </div>
                 </form>
             </div>
@@ -210,7 +264,7 @@ if ($get == 'membru') {
 if ($get == 'order') {
 ?>
 
-    <!-- Modal Aumenta -->
+    <!-- Modal Order Produtu -->
     <div class="modal fade" id="order_produtu_js" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -385,7 +439,7 @@ if ($get == 'pendente') {
         </div>
     </div>
 
-    <?php }
+<?php }
 if ($get == 'transasaun_sira') {
 ?>
 
@@ -407,7 +461,7 @@ if ($get == 'transasaun_sira') {
                                     <!-- <label for="naran_produtu">Naran Produtu:</label>
                                     <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu" readonly>
                                     <input type="hidden" class="form-control" name="id_produtu" id="id_produtu_js"> -->
-                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza"> 
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza">
                                     <p>
                                         Selu transaksaun Meza <b id="nu_meza"></b> ne'ebe Konsumu ona?
                                     </p>
@@ -443,7 +497,7 @@ if ($get == 'transasaun_sira') {
                                     <!-- <label for="naran_produtu">Naran Produtu:</label>
                                     <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu" readonly>
                                     <input type="hidden" class="form-control" name="id_produtu" id="id_produtu_js">-->
-                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza"> 
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza">
                                     <p>
                                         Meza <b id="nu_meza"></b> ho Tipu Transasaun Prosesa, Atu muda ba Konsumu ?
                                     </p>
@@ -582,6 +636,49 @@ if ($get == 'profile') {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
                         <button type="submit" class="btn btn-success" name="troka_password">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <?php }
+if ($get == 'relatorio_jeral') {
+?>
+
+    <!-- Modal Order Produtu -->
+    <div class="modal fade" id="aumenta_gastu_kada_loron" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Gastu Diariu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="naran_produtu">Osan sai: </label>
+                                    <input type="text" class="form-control" id="osan_sai_js" name="osan_sai">
+                                    <input type="hidden" class="form-control" name="id_identidade_pessoal" value="<?= $_SESSION['id_identidade_pessoal']?>">
+                                    <!-- <input type="hidden" class="form-control" name="id_meza" id="id_meza"> -->
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="folin">Data:</label>
+                                    <input type="text" class="form-control" id="data_js" name="data" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="aumenta_gastu_kada_loron">Rai</button>
                     </div>
                 </form>
             </div>

@@ -58,13 +58,18 @@ $relatorio_anual = $get_table->get_table_uuid("tinan, sum(osan_tama) as t_osan_t
                                             $osan_sai = 0;
                                             $diferensia = 0;
                                             foreach ($relatorio_diario as $loop) {
-                                                echo '<tr>
-                                                    <td class="text-center">' . $no++ . '</td>     
-                                                    <td class="text-center">' . $loop['data'] . '</td>
-                                                    <td class="text-center">' . $loop['osan_tama'] . '</td>
-                                                    <td class="text-center">' . $loop['osan_sai'] . '</td>
-                                                    <td class="text-center">' . $loop['diferensia'] . '</td>
-                                                </tr>';
+                                                echo '
+                                                        <tr>
+                                                            <td class="text-center">' . $no++ . '</td>     
+                                                            <td class="text-center">' . $loop['data'] . '</td>
+                                                            <td class="text-center">' . $loop['osan_tama'] . '</td>
+                                                            <td class="text-center">
+                                                                <a href="#" class="text-decoration-none" data-toggle="modal" data-target="#aumenta_gastu_kada_loron" data-data_js="' . $loop['data'] . '" data-osan_sai_js="' . $loop['osan_sai'] . '">
+                                                                    ' . $loop['osan_sai'] . '
+                                                                </a>
+                                                            </td>
+                                                            <td class="text-center">' . $loop['diferensia'] . '</td>
+                                                        </tr>';
                                                 $osan_tama += $loop['osan_tama'];
                                                 $osan_sai += $loop['osan_sai'];
                                                 $diferensia += $loop['diferensia'];
@@ -333,3 +338,20 @@ $relatorio_anual = $get_table->get_table_uuid("tinan, sum(osan_tama) as t_osan_t
         <a href="javascript:void(0);" class="btn-wide btn btn-success">Save</a>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#aumenta_gastu_kada_loron').on('show.bs.modal', function(event) {
+
+            var button = $(event.relatedTarget)
+
+            var data_js = button.data('data_js')
+            var osan_sai_js = button.data('osan_sai_js')
+            var modal = $(this)
+
+            modal.find('#data_js').val(data_js)
+            modal.find('#osan_sai_js').val(osan_sai_js)
+
+        })
+    })
+</script>

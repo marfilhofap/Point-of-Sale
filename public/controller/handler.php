@@ -41,6 +41,37 @@ if (isset($_POST['aumenta_produtu'])) {
 
     $insert_status = $class->aumenta_produtu($naran_produtu, $folin, $id_kategoria, $binariu, $naran_img, $tipu, $tamanhu);
 }
+if (isset($_POST['edit_produtu'])) {
+    $id_produtu = $_POST['id_produtu'];
+    $id_kategoria = $_POST['id_kategoria'];
+    $naran_produtu = $_POST['naran_produtu'];
+    $folin = $_POST['folin'];
+
+    // Anexos
+    $binariu = "";
+    $naran_img = "";
+    $tipu = "";
+    $tamanhu = 0;
+    if (!empty($_POST['action'])) {
+        if ($_POST['action'] == 'haruka' && $_FILES["file"]) {
+            if ($_FILES["file"]["error"] > 0) {
+                echo "Error: " . $_FILES["file"]["error"] . "<br>";
+            } else {
+                $img = fopen($_FILES['file']['tmp_name'], 'r') or die("cannot read the file\n");
+                $documentos = $_FILES['file']['name'];
+                $fahe = explode('.', $documentos);
+                $formato = strtolower(end($fahe));
+                $naran_img = $_FILES['file']['name'];
+                $tipu = $_FILES['file']['type'];
+                $tamanhu = $_FILES['file']['size'];
+                $data = fread($img, filesize($_FILES['file']['tmp_name']));
+                $binariu = pg_escape_bytea($data);
+            }
+        } 
+    } 
+
+    $edit_status = $class->edit_produtu($id_produtu, $id_kategoria, $naran_produtu, $folin, $binariu, $naran_img, $tipu, $tamanhu);
+}
 
 // Identificacao
 if (isset($_POST['aumenta_identidade'])) {
@@ -156,4 +187,13 @@ if (isset($_POST['selu_transasaun'])) {
     $oras_selu = $dt->format('H:i:s');
 
     $insert_status = $class->selu_transasaun($id_meza, $oras_selu, $data);
+}
+
+// Gastu kada Loron
+if (isset($_POST['aumenta_gastu_kada_loron'])) {
+    $osan_sai = $_POST['osan_sai'];
+    $data = $_POST['data'];
+    $id_identidade_pessoal = $_POST['id_identidade_pessoal'];
+
+    $insert_status = $class->aumenta_gastu_kada_loron($osan_sai, $data, $id_identidade_pessoal);
 }

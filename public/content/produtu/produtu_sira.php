@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'];
-$produtu = $get_table->get_table_uuid("", "produtu", "id_kategoria", $id, "");
+$produtu = $get_table->get_table_uuid("", "view_produtu_sira", "id_kategoria", $id, " order by naran_produtu ASC");
 $kategoria = $get_table->get_table_uuid("", "kategoria", "id_kategoria", $id, "");
 ?>
 
@@ -19,7 +19,7 @@ $kategoria = $get_table->get_table_uuid("", "kategoria", "id_kategoria", $id, ""
             </div>
         </div>
         <div class="page-title-actions">
-            <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal" data-target="#aumenta_kategoria">
+            <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal" data-target="#aumenta_produtu">
                 Aumenta <i class="fa fa-plus"></i>
             </button>
         </div>
@@ -55,10 +55,10 @@ $kategoria = $get_table->get_table_uuid("", "kategoria", "id_kategoria", $id, ""
                                         <td>' . $loop['estadu'] . '</td>
                                         <td>
                                             <div class="d-flex justify-content-center flex-shrink-0">
-                                                <a href="#" class="btn btn-sm btn-light btn-active-primary">
+                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#edit_produtu" data-id_produtu="' . $loop['id_produtu'] . '" data-id_kategoria="' . $loop['id_kategoria'] . '" data-kategoria="' . $loop['kategoria'] . '" data-naran_produtu="' . $loop['naran_produtu'] . '" data-folin="' . $loop['folin'] . '" data-estadu="' . $loop['estadu'] . '">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_materia" data-id_produtu="' . $loop['id_produtu'] . '" data-id_kategoria="' . $loop['id_kategoria'] . '">
+                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_produtu" data-id_produtu="' . $loop['id_produtu'] . '" data-kategoria="' . $loop['kategoria'] . '">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </div>
@@ -76,3 +76,26 @@ $kategoria = $get_table->get_table_uuid("", "kategoria", "id_kategoria", $id, ""
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#edit_produtu').on('show.bs.modal', function(event) {
+
+            var button = $(event.relatedTarget)
+
+            var kategoria = button.data('kategoria')
+            var id_kategoria_js = button.data('id_kategoria')
+            var id_produtu_js = button.data('id_produtu')
+            var naran_produtu_js = button.data('naran_produtu')
+            var folin_js = button.data('folin')
+            var modal = $(this)
+
+            modal.find('#id_kategoria_js').val(id_kategoria_js)
+            modal.find('#kategoria_js').val(kategoria)
+            modal.find('#id_produtu_js').val(id_produtu_js)
+            modal.find('#naran_produtu_js').val(naran_produtu_js)
+            modal.find('#folin_js').val(folin_js)
+
+        })
+    })
+</script>

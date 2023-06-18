@@ -84,8 +84,8 @@ if (isset($_GET['m'])) {
                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">' . $folin . '</div>
                                                     </div>
                                                     <div class="col-auto">';
-                                $jestaun_sira = $auth->image_cache($loop['id_kategoria']);
-                                echo '</div>
+                                                    $jestaun_sira = $auth->image_cache($id_produtu);
+                                                    echo '</div>
                                                 </div>
                                             </a>
                                         </div>
