@@ -1,16 +1,16 @@
 <?php
-$identificacao = $get_table->get_table("view_identidade_pessoal order by id_membru ASC");
+$resibu = $get_table->get_table_uuid("", "resibu", "data", date('Y-m-d'), " order by oras_selu DESC");
 ?>
 <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon">
-                <i class="pe-7s-user icon-gradient bg-mean-fruit">
+                <i class="pe-7s-bookmarks icon-gradient bg-mean-fruit">
                 </i>
             </div>
             <div>Resibu
                 <div class="page-title-subheading">
-                    <?= 'Total Membru nain ' . count($identificacao) . ' iha Love Story' ?>
+                    <?= 'Resibu ohin loron nian' ?>
                 </div>
             </div>
         </div>
@@ -20,62 +20,46 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 <div class="row">
     <div class="col-xl-12 col-lg-7">
         <div class="card shadow mb-4">
-            <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Membru</h6>
-                <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="#aumenta_identidade">
-                    <span class="text">Aumenta</span>
-                    <span class="icon text-white-50">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                </a>
-            </div> -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Tabela Resibu ba Transasaun durante ohin loron nian</h6>
+            </div>
             <div class="card-body">
 
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Naran Kompletu</th>
-                                <th>ID Membru</th>
-                                <th>Telf</th>
-                                <th>Email</th>
-                                <th>Pozisaun</th>
-                                <th>Asaun</th>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Meza</th>
+                                <th class="text-center">Oras</th>
+                                <th class="text-center">Total Folin</th>
+                                <th class="text-center">Asaun</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $no = 1;
-                            foreach ($identificacao as $loop) {
-                                $utilizador = $get_table->get_table_uuid("", "view_utilijador", "id_identidade_pessoal", $loop['id_identidade_pessoal'], " and estadu='Ativu'");
+                            foreach ($resibu as $loop) {
+ 
+                                $oras = $loop['oras_selu'];
+                                $formatu_oras = new DateTime($oras);
+                                $oras_selu = $formatu_oras->format('H:i');
 
                                 echo '<tr>
-                                        <td>' . $no++ . '</td>     
-                                        <td>' . $loop['naran_kompletu'] . '</td>
-                                        <td>' . $loop['id_membru'] . '</td>
-                                        <td>' . (!empty($loop['nu_telemovel']) ? $loop['nu_telemovel'] : '-') . '</td>
-                                        <td>' . (!empty($loop['email']) ? $loop['email'] : '-') . '</td>
-                                        <td>' . $loop['pozisaun'] . '</td>
-                                        <td>
-                                            <div class="d-flex justify-content-center flex-shrink-0">
-                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" target="_blank">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_identidade" data-id_identidade_pessoal="' . $loop['id_identidade_pessoal'] . '" data-naran_kompletu="' . $loop['naran_kompletu'] . '">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>';
-                                if (count($utilizador) == 0) {
-                                    echo '<a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#ativu_utilijador" data-id_identidade_pessoal="' . $loop['id_identidade_pessoal'] . '" data-naran_kompletu="' . $loop['naran_kompletu'] . '">
-                                                <i class="fas fa-user-plus"></i>
-                                            </a>';
-                                } else {
-                                    echo '<a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#dejativu_utilijador" data-id_identidade_pessoal="' . $loop['id_identidade_pessoal'] . '" data-naran_kompletu="' . $loop['naran_kompletu'] . '">
-                                                <i class="fas fa-user-minus"></i>
-                                            </a>';
-                                }
-                                '</div>
-                                    </td>
+                                        <td class="text-center">' . $no++ . '</td>     
+                                        <td class="text-center">' . $loop['nu_meza'] . '</td>
+                                        <td class="text-center">' . $oras_selu . '</td>
+                                        <td class="text-center">$ ' . $loop['total_hotu'] . '</td>
+                                        <td>';
+                                echo '<div class="d-flex justify-content-center flex-shrink-0">
+                                        <a href="?c=detallu&nu_meza=' . $loop['nu_meza'] . '&data=' . $loop['data'] . '&oras=' . $loop['oras_selu'] . '" class="btn btn-sm btn-light btn-active-primary" >
+                                            <i class="fas fa-info"></i>
+                                        </a>';
+                                echo '<div class="d-flex justify-content-center flex-shrink-0">
+                                        <a href="../public/content/relatorio/tcpdf/pdf_resibu.php?nu_meza='.$loop['nu_meza'].'&data='.$loop['data'].'&oras='.$loop['oras_selu'].'" target="_blank" class="btn btn-sm btn-light btn-active-primary" >
+                                            <i class="fas fa-print"></i>
+                                        </a>';
+                                echo '</td>
                                     </tr>';
                             }
                             ?>
@@ -88,38 +72,3 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#hamos_identidade').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var id_identidade_pessoal = button.data('id_identidade_pessoal')
-            var naran_kompletu = button.data('naran_kompletu')
-
-            var modal = $(this)
-            modal.find('#id_identidade_pessoal').val(id_identidade_pessoal)
-            modal.find('#naran').text(naran_kompletu)
-
-        })
-
-        $('#ativu_utilijador').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var a_id_identidade_pessoal = button.data('id_identidade_pessoal')
-            var a_naran = button.data('naran_kompletu')
-            var modal = $(this)
-            modal.find('#a_id_identidade_pessoal').val(a_id_identidade_pessoal)
-            modal.find('#a_naran').text(a_naran)
-
-        })
-
-        $('#dejativu_utilijador').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var d_id_identidade_pessoal = button.data('id_identidade_pessoal')
-            var d_naran = button.data('naran_kompletu')
-            var modal = $(this)
-            modal.find('#d_id_identidade_pessoal').val(d_id_identidade_pessoal)
-            modal.find('#d_naran').text(d_naran)
-
-        })
-    })
-</script>

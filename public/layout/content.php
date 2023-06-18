@@ -1,12 +1,12 @@
 <?php
 $content = isset($_GET['c']) ? $_GET['c'] : "index";
-// include('content/dashboard.php');
+// include('content/home.php');
 
 echo '<div class="app-main__inner">';
 
 switch ($content) {
     case 'index':
-        include __DIR__ . '/../content/dashboard.php';
+        include __DIR__ . '/../content/home.php';
         break;
     case 'meza_sira':
         include __DIR__ . '/../content/order/meza_sira.php';
@@ -14,20 +14,17 @@ switch ($content) {
     case 'order':
         include __DIR__ . '/../content/order/order.php';
         break;
+    case 'pendente':
+        include __DIR__ . '/../content/order/pendentes.php';
+        break;
     case 'produtu':
         include __DIR__ . '/../content/produtu/produtu.php';
         break;
     case 'produtu_sira':
         include __DIR__ . '/../content/produtu/produtu_sira.php';
         break;
-    case 'kategoria':
-        include __DIR__ . '/../content/produtu/kategoria.php';
-        break;
-    case 'transasaun':
-        include __DIR__ . '/../content/transasaun/transasaun.php';
-        break;
-    case 'meza_ujadu':
-        include __DIR__ . '/../content/transasaun/meza_ujadu.php';
+    case 'transasaun_sira':
+        include __DIR__ . '/../content/transasaun/transasaun_sira.php';
         break;
     case 'meza_mamuk':
         include __DIR__ . '/../content/transasaun/meza_mamuk.php';
@@ -44,11 +41,14 @@ switch ($content) {
     case 'resibu':
         include __DIR__ . '/../content/relatorio/resibu.php';
         break;
+    case 'detallu':
+        include __DIR__ . '/../content/relatorio/detallu.php';
+        break;
     case 'relatorio_jeral':
         include __DIR__ . '/../content/relatorio/relatorio_jeral.php';
         break;
     default:
-        include __DIR__ . '/../content/dashboard.php';
+        include __DIR__ . '/../content/home.php';
         break;
 }
 

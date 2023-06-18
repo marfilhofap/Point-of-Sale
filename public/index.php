@@ -40,9 +40,9 @@ date_default_timezone_set('Asia/Dili');
     -->
 
     <link href="./main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- <script src="assets/scripts/jquery-3.6.0.min.js"></script> -->
+
 </head>
 
 <body>
@@ -50,7 +50,7 @@ date_default_timezone_set('Asia/Dili');
 
         <?php include('layout/header.php') ?>
 
-        <?php include('layout/setting.php') ?>
+        <?php //include('layout/setting.php') ?>
 
         <div class="app-main">
             <?php include('layout/aside.php') ?>
@@ -64,5 +64,6 @@ date_default_timezone_set('Asia/Dili');
     </div>
     <script type="text/javascript" src="./assets/scripts/main.js"></script>
 </body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 </html>

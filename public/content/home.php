@@ -5,13 +5,27 @@
                 <i class="pe-7s-display1 icon-gradient bg-mean-fruit">
                 </i>
             </div>
-            <div>Dashboard
+            <div>Home
                 <div class="page-title-subheading">
-                    Informasaun no Grafiku sira konaba POS Love Story
+                    Point Of Sale - Love Story (COFFE, BAR & RESTO)
                 </div>
             </div>
         </div>
 
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-7">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+
+                <div class="alert alert-success text-center">
+                    <strong>Bemvindo!</strong> 
+                    <p>Ida ne'e mak pajina dahuluk ba <strong>Sistema Point of sale husi Love Story (COFFEE, BAR & RESTO)</strong> <p>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 <!-- <div class="row">
@@ -67,8 +81,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
+</div> -->
+<!-- <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="mb-3 card">
             <div class="card-header-tab card-header-tab-animation card-header">
@@ -292,4 +306,3 @@
         </div>
     </div>
 </div> -->
-

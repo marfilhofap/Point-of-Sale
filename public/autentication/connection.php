@@ -1,6 +1,6 @@
 <?php
 class connection
-{
+{ 
     public $PSQLHOST;
     public $PSQLUSER;
     public $PSQLDB;

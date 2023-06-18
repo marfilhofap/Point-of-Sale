@@ -42,7 +42,7 @@
                         <li>
                             <a href="index.php" class="<?= !isset($_GET['c']) ? 'mm-active' : '' ?>">
                                 <i class="metismenu-icon pe-7s-display1"></i>
-                                Dashboard
+                                Home
                             </a>
                         </li>
 
@@ -55,7 +55,7 @@
 
                         <!-- <li class="app-sidebar__heading">Order</li> -->
                         <li>
-                            <a href="?c=meza_sira" class="<?= $_GET['c'] == 'order' || $_GET['c'] == 'meza_sira' ? 'mm-active' : '' ?>">
+                            <a href="?c=meza_sira" class="<?= $_GET['c'] == 'order' || $_GET['c'] == 'meza_sira' || $_GET['c'] == 'pendente' ? 'mm-active' : '' ?>">
                                 <i class="metismenu-icon pe-7s-cart"></i>
                                 Order
                             </a>
@@ -64,14 +64,6 @@
                 <?php }
                 } ?>
 
-                <?php
-                // foreach ($jestaun_sira as $loop) {
-                //     if ($loop['id_jestaun'] == 'd0d9ef35-005b-4905-8de0-aa8a9e4e321c' || $loop['id_jestaun'] == 'e607497b-e6c7-4d2b-9478-48558f043a0e' || $loop['id_jestaun'] == '2011508b-bd6d-4bbb-81f0-e9e09e90d613') { 
-                //     echo '<li class="app-sidebar__heading">Manejamentu</li>';
-                //     break;
-                //     }
-                // }
-                ?>
                 <?php
                 foreach ($jestaun_sira as $loop) {
                     if ($loop['id_jestaun'] == 'd0d9ef35-005b-4905-8de0-aa8a9e4e321c') { ?>
@@ -87,7 +79,7 @@
                 <?php
                 foreach ($jestaun_sira as $loop) {
                     if ($loop['id_jestaun'] == 'e607497b-e6c7-4d2b-9478-48558f043a0e') { ?>
-                        <li class="<?= $_GET['c'] == 'meza_mamuk' || $_GET['c'] == 'meza_ujadu' ? 'mm-active' : '' ?>">
+                        <li class="<?= $_GET['c'] == 'meza_mamuk' || $_GET['c'] == 'transasaun_sira' ? 'mm-active' : '' ?>">
                             <a href="#">
                                 <i class="metismenu-icon pe-7s-shopbag"></i>
                                 Transasaun
@@ -95,9 +87,9 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="?c=meza_ujadu" class="<?= $_GET['c'] == 'meza_ujadu' ? 'mm-active' : '' ?>">
+                                    <a href="?c=transasaun_sira" class="<?= $_GET['c'] == 'transasaun_sira' ? 'mm-active' : '' ?>">
                                         <i class="metismenu-icon"></i>
-                                        Meza Ujadu
+                                        Transasaun sira
                                     </a>
                                 </li>
                                 <li>
@@ -141,7 +133,7 @@
                 <?php
                 foreach ($jestaun_sira as $loop) {
                     if ($loop['id_jestaun'] == 'ad77e562-1004-4287-9f21-160829e7c621') { ?>
-                        <li class="<?= $_GET['c'] == 'resibu' || $_GET['c'] == 'relatorio_jeral' ? 'mm-active' : '' ?>">
+                        <li class="<?= $_GET['c'] == 'resibu' || $_GET['c'] == 'relatorio_jeral' || $_GET['c'] == 'detallu' ? 'mm-active' : '' ?>">
                             <a href="#">
                                 <i class="metismenu-icon pe-7s-print"></i>
                                 Relatorio
@@ -149,11 +141,18 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="?c=resibu" class="<?= $_GET['c'] == 'resibu' ? 'mm-active' : '' ?>">
+                                    <!-- detallu -->
+                                    <a href="?c=resibu" class="<?= $_GET['c'] == 'resibu' || $_GET['c'] == 'detallu' ? 'mm-active' : '' ?>">
                                         <i class="metismenu-icon">
                                         </i>Resibu
                                     </a>
                                 </li>
+                                <!-- <li>
+                                    <a href="?c=resibu" class="<?//= $_GET['c'] == 'gastu_kada_loron' || $_GET['c'] == 'detallu' ? 'mm-active' : '' ?>">
+                                        <i class="metismenu-icon">
+                                        </i>Gastus
+                                    </a>
+                                </li> -->
                                 <li>
                                     <a href="?c=relatorio_jeral" class="<?= $_GET['c'] == 'relatorio_jeral' ? 'mm-active' : '' ?>">
                                         <i class="metismenu-icon">

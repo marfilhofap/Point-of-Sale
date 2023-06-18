@@ -28,19 +28,20 @@ $meza_mamuk = $get_table->get_table("view_meza_mamuk");
         <div class="card shadow mb-4">
             <div class="card-body">
 
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Numeru Meza</th>
-                                <th class="text-center">Asaun</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            foreach ($meza_mamuk as $loop) {
-                                echo '<tr>
+                <?php if (count($meza_mamuk) > 0) { ?>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Numeru Meza</th>
+                                    <th class="text-center">Asaun</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                foreach ($meza_mamuk as $loop) {
+                                    echo '<tr>
                                         <td class="text-center">' . $loop['nu_meza'] . '</td>
                                         <td>
                                             <div class="d-flex justify-content-center flex-shrink-0">
@@ -53,11 +54,16 @@ $meza_mamuk = $get_table->get_table("view_meza_mamuk");
                                             </div>
                                         </td>
                                     </tr>';
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php } else{
+                    echo '<div class="alert alert-success">
+                            Laiha Meza ruma nebe mak Avaliable agora dadaun !
+                        </div>';
+                } ?>
 
             </div>
 

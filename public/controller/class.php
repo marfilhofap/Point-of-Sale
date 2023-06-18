@@ -81,4 +81,104 @@ class j_membru
 
         $this->conn->exec($sql);
     }
+
+    public function troka_password($id_membru, $password_foun, $password_atual)
+    {
+        $sql = "SELECT * FROM view_utilijador WHERE id_membru='$id_membru' and password='$password_atual' and estadu='Ativu'";
+        $check = $this->conn->prepare($sql);
+        $check->execute();
+        $resultadu = $check->fetchAll(PDO::FETCH_ASSOC);
+        $id_utilijador = $resultadu[0]['id_utilijador'];
+
+        if (count($resultadu) > 0) {
+            $sql1 = "UPDATE utilijador SET password = '$password_foun' WHERE id_utilijador = '$id_utilijador'";
+            $this->conn->exec($sql1);
+        }
+    }
+
+
+    // Order Produtu
+    public function order_produtu($id_identidade_pessoal, $id_meza, $id_produtu, $tipu_transaksaun, $kuantidade, $total, $oras, $data)
+    {
+        $sql = $this->conn->prepare("INSERT into transaksaun (id_identidade_pessoal, id_meza, id_produtu, tipu_transaksaun, kuantidade, total, oras_order, data) 
+        VALUES (:id_identidade_pessoal, :id_meza, :id_produtu, :tipu_transaksaun, :kuantidade, :total, :oras, :data)");
+
+        $sql->bindParam(":id_identidade_pessoal", $id_identidade_pessoal);
+        $sql->bindParam(":id_meza", $id_meza);
+        $sql->bindParam(":id_produtu", $id_produtu);
+        $sql->bindParam(":tipu_transaksaun", $tipu_transaksaun);
+        $sql->bindParam(":kuantidade", $kuantidade);
+        $sql->bindParam(":oras", $oras);
+        $sql->bindParam(":total", $total);
+        $sql->bindParam(":data", $data);
+
+        $sql->execute();
+        return header("location: ../index.php?c=order&m=$id_meza");
+    }
+
+    // Alterar Order
+    public function alterar_order($id, $kuantidade, $total, $id_meza)
+    {
+        $sql = "UPDATE transaksaun SET kuantidade = '$kuantidade', total = '$total' WHERE id_transaksaun = '$id'";
+
+        $this->conn->exec($sql);
+
+        return header("location: ../index.php?c=pendente&m=$id_meza");
+    }
+
+    // Alterar Order
+    public function konfirma_order($id_meza)
+    {
+        $sql = "UPDATE transaksaun SET tipu_transaksaun = 'Prosesa' WHERE id_meza = '$id_meza' and tipu_transaksaun='Pendente'";
+
+        $this->conn->exec($sql);
+
+        return header("location: ../index.php?c=meza_sira");
+    }
+
+    // Konfirma Prosesa
+    public function konfirma_prosesa($id_meza, $data)
+    {
+        $sql = "UPDATE transaksaun SET tipu_transaksaun = 'Konsumu' WHERE id_meza = '$id_meza' and tipu_transaksaun='Prosesa' and data='$data'";
+
+        $this->conn->exec($sql);
+
+        return header("location: ../index.php?c=transasaun_sira");
+    }
+
+    // SELU
+    public function selu_transasaun($id_meza, $oras_selu, $data)
+    {
+
+        $sql = "SELECT * from view_order_sira where id_meza='$id_meza' and tipu_transaksaun='Konsumu' and data='$data'";
+        $check = $this->conn->prepare($sql);
+        $check->execute();
+        $resultadu = $check->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($resultadu) > 0) {
+            foreach ($resultadu as $loop) {
+                $que = $this->conn->prepare("INSERT into relatorio (naran_kompletu, id_membru, nu_meza, naran_produtu, folin, kuantidade, total, data, oras_tama, oras_selu) 
+                        VALUES (:naran_kompletu, :id_membru, :nu_meza, :naran_produtu, :folin, :kuantidade, :total, :data, :oras_tama, :oras_selu)");
+
+                $que->bindParam(":naran_kompletu", $loop['naran_kompletu']);
+                $que->bindParam(":id_membru", $loop['id_membru']);
+                $que->bindParam(":nu_meza", $loop['nu_meza']);
+                $que->bindParam(":naran_produtu", $loop['naran_produtu']);
+                $que->bindParam(":folin", $loop['folin']);
+                $que->bindParam(":kuantidade", $loop['kuantidade']);
+                $que->bindParam(":total", $loop['total']);
+                $que->bindParam(":data", $loop['data']);
+                $que->bindParam(":oras_tama", $loop['oras_order']);
+                $que->bindParam(":oras_selu", $oras_selu);
+
+                $que->execute();
+
+                $this->delete('transaksaun', 'id_transaksaun', $loop['id_transaksaun']);
+            }
+
+        } else {
+            var_dump('la_susesu');
+        }
+        return header("location: ../index.php?c=resibu");
+    }
 }

@@ -8,7 +8,7 @@ $meza = $get_table->get_table("meza");
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon">
-                <i class="pe-7s-coffee icon-gradient bg-mean-fruit">
+                <i class="pe-7s-keypad icon-gradient bg-mean-fruit">
                 </i>
             </div>
             <div>Meza sira

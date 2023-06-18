@@ -227,7 +227,8 @@ if ($get == 'order') {
                                 <div class="form-group">
                                     <label for="naran_produtu">Naran Produtu:</label>
                                     <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu" readonly>
-                                    <input type="hidden" class="form-control" name="id_produtu_js" id="id_produtu_js">
+                                    <input type="hidden" class="form-control" name="id_produtu" id="id_produtu_js">
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -240,6 +241,7 @@ if ($get == 'order') {
                                 <div class="form-group">
                                     <label for="sexo">Kuantidade:</label>
                                     <input type="number" class="form-control" name="kuantidade">
+                                    <input type="hidden" class="form-control" name="id_identidade_pessoal" value="<?= $_SESSION['id_identidade_pessoal'] ?>">
                                 </div>
                             </div>
                         </div>
@@ -248,6 +250,211 @@ if ($get == 'order') {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
                         <button type="submit" class="btn btn-success" name="order_produtu">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php }
+if ($get == 'pendente') {
+?>
+
+    <!-- Modal Alterar Order -->
+    <div class="modal fade" id="alterar_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Edit Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="naran_produtu">Naran Produtu:</label>
+                                    <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu" readonly>
+                                    <input type="hidden" class="form-control" name="id_produtu" id="id_produtu_js">
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="folin">Folin:</label>
+                                    <input type="text" class="form-control" id="folin_js" name="folin" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="sexo">Kuantidade:</label>
+                                    <input type="number" class="form-control" name="kuantidade" id="kuantidade">
+                                    <input type="hidden" class="form-control" name="id_transaksaun" id="id_transaksaun">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="alterar_order">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Alterar Order -->
+    <div class="modal fade" id="kansela_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Tebes hakarak kansela Order ida ne'e ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="naran_produtu">Naran Produtu:</label>
+                                    <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu" readonly>
+                                    <input type="hidden" class="form-control" name="id_produtu" id="id_produtu_js">
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="folin">Folin:</label>
+                                    <input type="text" class="form-control" id="folin_js" name="folin" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="sexo">Kuantidade:</label>
+                                    <input type="number" readonly class="form-control" name="kuantidade" id="kuantidade">
+                                    <input type="hidden" class="form-control" name="id_transaksaun" id="id_transaksaun">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-danger" name="kansela_order">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmar Order -->
+    <div class="modal fade" id="konfirma_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Konfirma Transasaun !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <p>
+                                        Ita nia Transasaun ho Total $ <b id="folin_total"></b>
+                                    </p>
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-primary" name="konfirma_order">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <?php }
+if ($get == 'transasaun_sira') {
+?>
+
+    <!-- Modal Konfirma Tipu Transasaun Konsumu -->
+    <div class="modal fade" id="konfirma_konsumu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Konfirma Transasaun</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <!-- <label for="naran_produtu">Naran Produtu:</label>
+                                    <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu" readonly>
+                                    <input type="hidden" class="form-control" name="id_produtu" id="id_produtu_js"> -->
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza"> 
+                                    <p>
+                                        Selu transaksaun Meza <b id="nu_meza"></b> ne'ebe Konsumu ona?
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Lae</button>
+                        <button type="submit" class="btn btn-success" name="selu_transasaun">Sim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirma Tipu Transasaun Prosesa -->
+    <div class="modal fade" id="konfirma_prosesa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Konfirma Transasaun</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <!-- <label for="naran_produtu">Naran Produtu:</label>
+                                    <input type="text" class="form-control" id="naran_produtu_js" name="naran_produtu" readonly>
+                                    <input type="hidden" class="form-control" name="id_produtu" id="id_produtu_js">-->
+                                    <input type="hidden" class="form-control" name="id_meza" id="id_meza"> 
+                                    <p>
+                                        Meza <b id="nu_meza"></b> ho Tipu Transasaun Prosesa, Atu muda ba Konsumu ?
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Lae</button>
+                        <button type="submit" class="btn btn-success" name="konfirma_prosesa">Sim</button>
                     </div>
                 </form>
             </div>
@@ -346,8 +553,8 @@ if ($get == 'profile') {
                         <div class="row justify-content-md-center mt-2">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="data_moris">ID Membru:</label>
-                                    <input type="text" readonly class="form-control" id="data_moris" name="data_moris" placeholder="<?= $_SESSION['id_membru']?>">
+                                    <label for="id_membru">ID Membru:</label>
+                                    <input type="text" readonly class="form-control" id="id_membru" name="id_membru" value="<?= $_SESSION['id_membru'] ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">

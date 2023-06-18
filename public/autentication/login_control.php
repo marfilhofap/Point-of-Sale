@@ -13,7 +13,7 @@ if (isset($_POST['login_sistema'])) {
     if ($username == "") {
         $login_error_message = 'Favor Ida hatama User Name!';
         header('Location: ../login.php?err=1');
-    } elseif ($password == "") {
+    } elseif ($password == "") { 
         $login_error_message = 'Favor Ida hatama Password!';
         header('Location: ../login.php?err=2');
     } else {
@@ -26,6 +26,7 @@ if (isset($_POST['login_sistema'])) {
 
             $_SESSION['id_membru'] = $username;
             $_SESSION['id_utilijador'] = $utilijador[0]['id_utilijador'];
+            $_SESSION['id_identidade_pessoal'] = $dados[0]['id_identidade_pessoal'];
 
             $naran = $dados[0]['naran_kompletu'];
             $parts = explode(' ', $naran);

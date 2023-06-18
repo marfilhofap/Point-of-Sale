@@ -1,8 +1,8 @@
 <?php
-if (isset($_GET['m'])) { 
+if (isset($_GET['m'])) {
 
     $id_meza = $_GET['m'];
-    $kategoria = $get_table->get_table("kategoria order by kategoria ASC limit 1");
+    $kategoria = $get_table->get_table("kategoria order by kategoria ASC");
     $produtu_sira = $get_table->get_table("produtu order by naran_produtu ASC");
     $meza = $get_table->get_table_uuid("", "transaksaun", "id_meza", $id_meza, " and tipu_transaksaun='Pendente'");
 
@@ -22,6 +22,7 @@ if (isset($_GET['m'])) {
             </div>
             <div class="page-title-actions">
                 <button class="mb-2 mr-2 btn btn-info">
+                    <a href="?c=pendente&m=<?=$id_meza?>" style="text-decoration: none; color: inherit">
                     <span class="btn-icon-wrapper pr-2 opacity-7">
                         <i class="fa fa-business-time fa-w-30"></i>
                     </span>
@@ -29,6 +30,7 @@ if (isset($_GET['m'])) {
                     <span class="badge badge-pill badge-light">
                         <?= count($meza) ?>
                     </span>
+                    </a>
                 </button>
             </div>
         </div>
@@ -62,7 +64,7 @@ if (isset($_GET['m'])) {
                         $no = 1;
                         // '.$loops['id_produtu'].'
                         foreach ($kategoria as $loop) {
-                            $produtu = $get_table->get_table_uuid("", "produtu", "id_kategoria", $loop['id_kategoria'], " limit 1");
+                            $produtu = $get_table->get_table_uuid("", "produtu", "id_kategoria", $loop['id_kategoria'], "");
                             $act = $no == 1 ? 'active' : '';
 
                             echo '<div class="tab-pane ' . $act . '" id="k' . $loop['id_kategoria'] . '" role="tabpanel">
@@ -71,7 +73,7 @@ if (isset($_GET['m'])) {
                                 $id_produtu = $loops['id_produtu'];
                                 $naran_produtu = $loops['naran_produtu'];
                                 $folin = $loops['folin'];
-                                echo '<div class="col-xl-3 col-md-6 mb-4"  data-toggle="modal" data-target="#order_produtu_js" data-id_produtu="' . $id_produtu . '" data-naran_produtu="' . $naran_produtu . '" data-folin="' . $folin . '">
+                                echo '<div class="col-xl-3 col-md-6 mb-4"  data-toggle="modal" data-target="#order_produtu_js" data-id_produtu="' . $id_produtu . '" data-naran_produtu="' . $naran_produtu . '" data-folin="' . $folin . '" data-id_meza="' . $id_meza . '">
                                     <div class="card border-left-primary shadow py-2">
                                         <div class="card-body">
                                             <a href="#" class="text-decoration-none" data-toggle="modal">
@@ -82,8 +84,8 @@ if (isset($_GET['m'])) {
                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">' . $folin . '</div>
                                                     </div>
                                                     <div class="col-auto">';
-                                                    $jestaun_sira = $auth->image_cache($loop['id_kategoria']);
-                                                    echo '</div>
+                                $jestaun_sira = $auth->image_cache($loop['id_kategoria']);
+                                echo '</div>
                                                 </div>
                                             </a>
                                         </div>
@@ -94,7 +96,7 @@ if (isset($_GET['m'])) {
 
                             $no++;
                         }
-                        ?> 
+                        ?>
 
                     </div>
                 </div>
@@ -110,21 +112,22 @@ if (isset($_GET['m'])) {
 <?php } ?>
 
 <script>
-    console.log('susesu 1');
-    $('#order_produtu_js').on('show.bs.modal', function(event) {
+    $(document).ready(function() {
+        $('#order_produtu_js').on('show.bs.modal', function(event) {
 
-        var button = $(event.relatedTarget)
+            var button = $(event.relatedTarget)
 
-        var id_produtu_js = button.data('id_produtu')
-        var naran_produtu_js = button.data('naran_produtu')
-        var folin_js = button.data('folin')
-        var modal = $(this)
+            var id_produtu_js = button.data('id_produtu')
+            var naran_produtu_js = button.data('naran_produtu')
+            var folin_js = button.data('folin')
+            var id_meza = button.data('id_meza')
+            var modal = $(this)
 
-        alert('id_produtu_js');
+            modal.find('#id_produtu_js').val(id_produtu_js)
+            modal.find('#naran_produtu_js').val(naran_produtu_js)
+            modal.find('#folin_js').val(folin_js)
+            modal.find('#id_meza').val(id_meza)
 
-        modal.find('#id_produtu_js').val(id_produtu_js)
-        modal.find('#naran_produtu_js').val(naran_produtu_js)
-        modal.find('#folin_js').val(folin_js)
-
+        })
     })
 </script>

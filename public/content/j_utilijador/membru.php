@@ -43,6 +43,7 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
                         <tbody>
                             <?php
                             $no = 1;
+                            $identificacao = $get_table->get_table("view_identidade_pessoal order by id_membru ASC");
                             foreach ($identificacao as $loop) {
                                 $utilizador = $get_table->get_table_uuid("", "view_utilijador", "id_identidade_pessoal", $loop['id_identidade_pessoal'], " and estadu='Ativu'");
 
@@ -55,7 +56,7 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
                                         <td>' . $loop['pozisaun'] . '</td>
                                         <td>
                                             <div class="d-flex justify-content-center flex-shrink-0">
-                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" target="_blank">
+                                                <a href="?c=edit_identidade&id='.$loop['id_identidade_pessoal'].'" class="btn btn-sm btn-light btn-active-primary" >
                                                     <i class="fas fa-pen"></i>
                                                 </a>
                                                 <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_identidade" data-id_identidade_pessoal="' . $loop['id_identidade_pessoal'] . '" data-naran_kompletu="' . $loop['naran_kompletu'] . '">
@@ -87,7 +88,7 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#hamos_identidade').on('show.modal', function(event) {
+        $('#hamos_identidade').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id_identidade_pessoal = button.data('id_identidade_pessoal')
             var naran_kompletu = button.data('naran_kompletu')
@@ -98,7 +99,7 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 
         })
 
-        $('#ativu_utilijador').on('show.modal', function(event) {
+        $('#ativu_utilijador').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var a_id_identidade_pessoal = button.data('id_identidade_pessoal')
             var a_naran = button.data('naran_kompletu')
@@ -108,7 +109,7 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 
         })
 
-        $('#dejativu_utilijador').on('show.modal', function(event) {
+        $('#dejativu_utilijador').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var d_id_identidade_pessoal = button.data('id_identidade_pessoal')
             var d_naran = button.data('naran_kompletu')
@@ -118,4 +119,5 @@ $identificacao = $get_table->get_table("view_identidade_pessoal order by id_memb
 
         })
     })
+
 </script>

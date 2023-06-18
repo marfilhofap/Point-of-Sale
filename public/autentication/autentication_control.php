@@ -23,7 +23,7 @@ class ControloAutenticacao
     public function login($username, $password)
     {
         try {
-            $sql = "SELECT * FROM utilijador
+            $sql = "SELECT id_utilijador FROM utilijador
             inner join identidade_pessoal using (id_identidade_pessoal)
             WHERE id_membru = :username AND password=:password AND estadu='Ativu'";
 

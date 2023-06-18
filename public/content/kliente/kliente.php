@@ -12,7 +12,7 @@ if (isset($_GET['m'])) {
                     <i class="pe-7s-coffee icon-gradient bg-mean-fruit">
                     </i>
                 </div>
-                <div>Dashboard
+                <div>Home
                     <div class="page-title-subheading">
                         Informasaun no Grafiku sira konaba POS Love Story
                     </div>
