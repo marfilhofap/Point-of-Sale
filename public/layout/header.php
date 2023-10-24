@@ -54,10 +54,12 @@
                         <div class="widget-content-left">
                             <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                    <!-- Avatar nia fatin -->
+                                    <?= $jestaun_sira = $auth->profile_cache($_SESSION['id_identidade_pessoal']); ?>
+
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
-                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-ls dropdown-menu-ls-right">
                                     <a href="?c=profile" class="">
                                         <button type="button" tabindex="0" class="dropdown-item">
                                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>

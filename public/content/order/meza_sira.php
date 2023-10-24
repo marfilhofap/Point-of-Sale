@@ -2,6 +2,9 @@
 $kategoria = $get_table->get_table("kategoria order by kategoria ASC");
 $prod = $get_table->get_table("produtu");
 $meza = $get_table->get_table("meza");
+
+foreach ($jestaun_sira as $loop) {
+    if ($loop['id_jestaun'] == '650a2e7d-80f0-4f03-bef7-abd0731da275') { 
 ?>
 
 <div class="app-page-title">
@@ -58,3 +61,8 @@ $meza = $get_table->get_table("meza");
         </div>
     </div>
 </div>
+
+<?php 
+    }
+}
+?>

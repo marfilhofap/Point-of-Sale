@@ -1,11 +1,16 @@
 <?php
-$nu_meza = $_GET['nu_meza'];
-$data = $_GET['data'];
-$oras = $_GET['oras'];
-$formatu_oras = new DateTime($oras);
-$oras_lolos = $formatu_oras->format('H:i');
 
-if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
+if (!empty($_POST['nu_meza']) && !empty($_POST['data']) && !empty($_POST['oras']) && !empty($_POST['osan_fo'])) {
+
+  $nu_meza = $_POST['nu_meza'];
+  $data = $_POST['data'];
+  $oras = $_POST['oras'];
+  $osan_fo = floatval($_POST['osan_fo']);
+
+  $formatu_oras = new DateTime($oras);
+  $oras_lolos = $formatu_oras->format('H:i');
+  $dt = new DateTime("now", new DateTimeZone('Asia/Dili'));
+  $dt->setTimestamp(time());
 
   require_once('tcpdf_include.php');
   include_once '../../../../config/parametros_db.php';
@@ -26,7 +31,7 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
     {
       // Logo
       $image_file = K_PATH_IMAGES . 'logo_ls.jpg';
-      $this->Image($image_file, 55, 4, 100, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+      $this->Image($image_file, 5, 2, 50, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
       // Set font
       // $this->setFont('helvetica', 'B', 20);
       // Title
@@ -37,26 +42,26 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
     public function Footer()
     {
       // Position at 15 mm from bottom
-      $this->setY(-15);
+      // $this->setY(-15);
 
       // Set font
-      $this->setFont('helvetica', 'I', 8);
+      // $this->setFont('helvetica', 'I', 8);
 
       // Page number
-      $this->Cell(0, 10, 'Página ' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+      // $this->Cell(0, 10, 'Página ' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 
       // Position at 15 mm from bottom
-      $this->setY(-15);
+      // $this->setY(-15);
 
       // Set font
-      $this->setFont('helvetica', 'I', 8);
+      // $this->setFont('helvetica', 'I', 8);
 
-      $this->Cell(0, 10, 'Imprimi iha dia '.date("d-m-Y H:i:s").' husi POS - Love Story', 0, false, 'R', 0, '', 0, false, 'T', 'M');
+      // $this->Cell(0, 10, 'Imprimi iha dia '.date("d-m-Y H:i:s"), 0, false, 'R', 0, '', 0, false, 'T', 'M');
     }
   }
 
   // create new PDF document
-  $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+  $pdf = new MYPDF('P', 'mm', array(60, 100), false, 'UTF-8', false);
 
   // set document information
   $pdf->SetCreator(PDF_CREATOR);
@@ -76,7 +81,7 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
   $pdf->setDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
   // set margins
-  $pdf->setMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+  $pdf->setMargins(3, 18, 3);
   $pdf->setHeaderMargin(PDF_MARGIN_HEADER);
   $pdf->setFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -94,20 +99,11 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
 
   // -----------------------------------------------------------------------------------------
 
-
-
-  // -----------------------------------------------------------------------------------------
-
   // add a page
-  $pdf->AddPage('P', 'A4');
-
-  $br = '<br><br><br>';
-
-  // print a block of text using Write()
-  $pdf->writeHTML($br, true, false, false, false, '');
+  $pdf->AddPage();
 
   // set font
-  $pdf->setFont('times', 'B', 12);
+  $pdf->setFont('times', 'B', 7);
 
   $titulu = 'Resibu Love Story (Meza ' . $nu_meza . ')';
 
@@ -116,26 +112,18 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
 
   // -----------------------------------------------------------------------------------------
 
-  $br = '<br>';
-
-  // print a block of text using Write()
-  $pdf->writeHTML($br, true, false, false, false, '');
-
-  // -----------------------------------------------------------------------------------------
-
   // set font
-  $pdf->setFont('times', '', 10);
-
+  $pdf->setFont('times', '', 6);
 
   // set some text to print
   $txt = '<table border="1" cellpadding="3" cellspacing="0">
    <thead>
      <tr style="background-color:#4d94ff;color:#000000">
-      <th width="60" align="center"><b>No</b></th>
-      <th width="250" align="center"><b>Produtu</b></th>
-      <th width="90" align="center"><b>Folin</b></th>
-      <th width="90" align="center"><b>Kuantidade</b></th>
-      <th width="100" align="center"><b>Total Folin</b></th>
+      <th width="17" align="center"><b>No</b></th>
+      <th width="53" align="center"><b>Produtu</b></th>
+      <th width="35" align="center"><b>Folin</b></th>
+      <th width="45" align="center"><b>Kuantidade</b></th>
+      <th width="40" align="center"><b>Total Folin</b></th>
      </tr>
      </thead>
      <tbody>';
@@ -145,28 +133,48 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
   $no = 1;
   $kuantidade_total = 0;
   $folin_total = 0;
+
+
   foreach ($row as $key => $dados) {
     $naran_produtu = $dados['naran_produtu'];
     $folin = $dados['folin'];
     $kuantidade = $dados['kuantidade'];
-    $kuantidade_total +=$kuantidade;
+    $kuantidade_total += $kuantidade;
     $total = $dados['total'];
     $folin_total += $total;
 
     $txt .= '<tr>
-      <td width="60" align="center">' . $no++ . '</td>
-      <td width="250" align="center">' . $naran_produtu . '</td>
-      <td width="90" align="center">$ ' . $folin . '</td>
-      <td width="90" align="center">' . $kuantidade . '</td>
-      <td width="100" align="center">$ ' . $total . '</td>
+      <td width="17" align="center">' . $no++ . '</td>
+      <td width="53">' . $naran_produtu . '</td>
+      <td width="35">$ ' . $folin . '</td>
+      <td width="45" align="center">' . $kuantidade . '</td>
+      <td width="40">$ ' . $total . '</td>
      </tr>';
   }
 
   $txt .= '<tr>
-      <td width="400" align="center"><b>Total</b></td>
-      <td width="90" align="center"><b>'.$kuantidade_total.'</b></td>
-      <td width="100" align="center"><b>$ '.$folin_total.'</b></td>
+      <td width="105" align="center"><b>Total:</b></td>
+      <td width="45" align="center"><b>' . $kuantidade_total . '</b></td>
+      <td width="40"><b>$ ' . $folin_total . '</b></td>
      </tr>';
+
+  $txt .= '<tr>
+     <td width="150" align="center"><b>Osan kliente:</b></td>
+     <td width="40"><b>$ ' . $osan_fo . '</b></td>
+    </tr>';
+
+  $osan_volta = $osan_fo - $folin_total;
+
+  if ($osan_fo > $folin_total) {
+    $txt .= '<tr>
+    <td width="150" align="center"><b>Osan volta:</b></td>
+    <td width="40"><b>$ ' . $osan_volta . '</b></td>
+   </tr>';
+  } else {
+    $txt .= '<tr>
+    <td width="190" align="center" color="red"><b>Deskulpa! Osan husi Kliente kiik liu folin total</b></td>
+   </tr>';
+  }
 
   $txt .= '</tbody>
    </table>';
@@ -176,11 +184,17 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
 
   // -----------------------------------------------------------------------------------------
 
-  $br = '<br><br><br>';
+  $oras = $dt->format('d-m-Y (H:i)');
 
-  // print a block of text using Write()
-  $pdf->writeHTML($br, true, false, false, false, '');
+  $pdf->setFont('times', '', 7);
 
+  $data_oras = 'Imprimi iha dia ' . $oras;
+
+  $pdf->Write(0, $data_oras, '', 0, 'C', true, 0, false, false, 0);
+
+  $br = '---------------------------------------------------------';
+
+  $pdf->Write(0, $br, '', 0, 'C', true, 0, false, false, 0);
 
   // -----------------------------------------------------------------------------------------
 
@@ -193,5 +207,5 @@ if (!empty($nu_meza) && !empty($data) && !empty($oras)) {
 
 
 } else {
-  var_dump($_GET);
+  var_dump($_POST);
 }

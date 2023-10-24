@@ -47,6 +47,15 @@ switch ($content) {
     case 'relatorio_jeral':
         include __DIR__ . '/../content/relatorio/relatorio_jeral.php';
         break;
+    case 'relatorio_diaria_por_mensal':
+        include __DIR__ . '/../content/relatorio/relatorio_diaria_por_mensal.php';
+        break;
+    case 'relatorio_mensal_por_ano':
+        include __DIR__ . '/../content/relatorio/relatorio_mensal_por_ano.php';
+        break;
+    case 'relatorio_detalho_por_dia':
+        include __DIR__ . '/../content/relatorio/relatorio_detalho_por_dia.php';
+        break;
     default:
         include __DIR__ . '/../content/home.php';
         break;

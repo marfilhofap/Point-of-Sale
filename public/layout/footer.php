@@ -7,9 +7,6 @@
                         <a href="javascript:void(0);" class="nav-link">
                             Point Of Sale - Love Story (COFFEE, BAR & RESTO)
                             ©
-                            <!-- <script>
-                                document.write(new Date().getFullYear())
-                            </script> -->
                             <?= date("d-m-Y H:i:s"); ?>
                         </a>
                     </li>

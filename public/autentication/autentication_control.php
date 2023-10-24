@@ -55,7 +55,7 @@ class ControloAutenticacao
     }
 
     public function image_cache($id_ligasaun)
-    {
+    { 
         $imajem = md5($id_ligasaun) . '.jpg';
         if (!file_exists('cache/' . $imajem)) {
 
@@ -84,6 +84,37 @@ class ControloAutenticacao
             }
         } else {
             echo '<img class="img-profile" src="cache/' . $imajem . '" alt="Foto" style="width: 100px;">';
+        }
+    }
+
+    public function profile_cache($id_ligasaun)
+    {
+        $imajem = md5($id_ligasaun) . '.jpg';
+        if (!file_exists('cache/' . $imajem)) {
+
+            $con = pg_connect("host=$this->PSQLHOST dbname=$this->PSQLDB  user=$this->PSQLUSER  password=$this->PSQLPW")
+                or die("Could not connect to server\n");
+
+            $query = "SELECT binariu FROM imajem where id_ligasaun = '$id_ligasaun'";
+            $res = pg_query($con, $query) or die(pg_last_error($con));
+            $arquivo = pg_fetch_array($res, null, PGSQL_ASSOC);
+
+            if (empty($arquivo)) {
+                $target = 'cache/Profile.png';
+                echo '<img width="42" class="rounded-circle" src="' . $target . '" alt="Foto Profile">';
+            } else {
+                $foto = $arquivo["binariu"];
+                $a = pg_unescape_bytea($foto);
+                $foto_name = $id_ligasaun;
+                $b = md5($foto_name) . '.jpg';
+                $file_name = "cache/" . $b;
+                $img = fopen($file_name, 'wb') or die("cannot open image\n");
+                $abc = fwrite($img, $a) or die("cannot write image data\n");
+                fclose($img);
+                echo '<img width="42" class="rounded-circle" src="cache/' . $b . '" alt="Foto Profile">';
+            }
+        } else {
+            echo '<img width="42" class="rounded-circle" src="cache/' . $imajem . '" alt="Foto Profile">';
         }
     }
 }

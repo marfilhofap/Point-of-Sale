@@ -1,5 +1,8 @@
 <?php
 $pozisaun = $get_table->get_table("pozisaun order by pozisaun ASC");
+
+foreach ($jestaun_sira as $loop) {
+    if ($loop['id_jestaun'] == '2011508b-bd6d-4bbb-81f0-e9e09e90d613') {
 ?>
 
 <div class="app-page-title">
@@ -57,7 +60,7 @@ $pozisaun = $get_table->get_table("pozisaun order by pozisaun ASC");
                                 //                     <a href="#" class="btn btn-sm btn-light btn-active-primary" target="_blank">
                                 //                         <i class="fas fa-pen"></i>
                                 //                     </a>
-                                //                     <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_pozisaun" data-id_pozisaun="' . $loop['id_pozisaun'] . '" data-pozisaun="' . $loop['pozisaun'] . '">
+                                //                     <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#delete_pozisaun" data-id_pozisaun="' . $loop['id_pozisaun'] . '" data-pozisaun="' . $loop['pozisaun'] . '">
                                 //                         <i class="fas fa-trash"></i>
                                 //                     </a>
                                 //                 </div>
@@ -74,6 +77,9 @@ $pozisaun = $get_table->get_table("pozisaun order by pozisaun ASC");
         </div>
     </div>
 </div>
+
+<?php }
+}?>
 
 
 <!-- Modal Aumenta -->
@@ -151,7 +157,7 @@ $pozisaun = $get_table->get_table("pozisaun order by pozisaun ASC");
 </div> -->
 
 <!-- Modal Hamos -->
-<!-- <div class="modal fade" id="hamos_identidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="delete_identidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header bg-gradient-success">
@@ -167,7 +173,7 @@ $pozisaun = $get_table->get_table("pozisaun order by pozisaun ASC");
                             <input type="hidden" id="id_identidade_pessoal" name="id_identidade_pessoal">
                             <p>Tebes hakarak hamos <b id="naran"></b> ?</p>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
-                            <button type="submit" class="btn btn-danger" name="hamos_identidade">Sim</button>
+                            <button type="submit" class="btn btn-danger" name="delete_identidade">Sim</button>
                         </div>
                     </div>
                 </div>
@@ -178,7 +184,7 @@ $pozisaun = $get_table->get_table("pozisaun order by pozisaun ASC");
 
 <!-- <script>
     $(document).ready(function() {
-        $('#hamos_identidade').on('show.bs.modal', function(event) {
+        $('#delete_identidade').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var id_identidade_pessoal = button.data('id_identidade_pessoal')
             var naran_kompletu = button.data('naran_kompletu')

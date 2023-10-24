@@ -105,6 +105,33 @@ if ($get == 'produtu_sira') {
         </div>
     </div>
 
+    <!-- Modal Hamos -->
+    <div class="modal fade" id="delete_produtu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Hamos Produtu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-12">
+                                <input type="hidden" id="id_produtu" name="id_produtu">
+                                <input type="hidden" id="id_kategoria" name="id_kategoria">
+                                <p>Tebes hakarak hamos <b id="naran_produtu"></b> ?</p>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                                <button type="submit" class="btn btn-danger" name="delete_produtu">Sim</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 <?php }
 if ($get == 'membru') {
 ?>
@@ -113,7 +140,7 @@ if ($get == 'membru') {
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Aumenta Area Materia</h5>
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Aumenta Membru</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -182,8 +209,83 @@ if ($get == 'membru') {
         </div>
     </div>
 
+    <!-- Edit My Profil -->
+    <div class="modal fade" id="edit_identidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Membru</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="naran_kompletu">Naran Kompletu:</label>
+                                    <input type="text" class="form-control" id="naran_kompletu" name="naran_kompletu">
+                                    <input type="hidden" class="form-control" id="id_identidade_pessoal" name="id_identidade_pessoal">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="sexo">Sexo:</label>
+                                    <select class="form-control" id="sexo" name="sexo">
+                                        <option selected hidden>- Sexo -</option>
+                                        <option value="M">Mane</option>
+                                        <option value="F">Feto</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="sexo">Pozisaun:</label>
+                                    <select class="form-control" id="id_pozisaun" name="id_pozisaun">
+                                        <?php
+                                        $pozisaun = $get_table->get_table("pozisaun");
+                                        echo '<option selected hidden>- Pozisaun -</option>';
+                                        foreach ($pozisaun as $loop) {
+                                            echo '<option value="' . $loop['id_pozisaun'] . '">' . $loop['pozisaun'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center mt-2">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="data_moris">Data Moris:</label>
+                                    <input type="date" class="form-control" id="data_moris" name="data_moris">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nu_telemovel">Nu.Telf:</label>
+                                    <input type="text" class="form-control" id="nu_telemovel" name="nu_telemovel">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="edit_identidade">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Hamos -->
-    <div class="modal fade" id="hamos_identidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="delete_identidade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
@@ -199,7 +301,7 @@ if ($get == 'membru') {
                                 <input type="hidden" id="id_identidade_pessoal" name="id_identidade_pessoal">
                                 <p>Tebes hakarak hamos <b id="naran"></b> ?</p>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
-                                <button type="submit" class="btn btn-danger" name="hamos_identidade">Sim</button>
+                                <button type="submit" class="btn btn-danger" name="delete_identidade">Sim</button>
                             </div>
                         </div>
                     </div>
@@ -516,14 +618,15 @@ if ($get == 'transasaun_sira') {
     </div>
 
 <?php }
-if ($get == 'profile') {
+if ($get == 'meza_mamuk') {
 ?>
-    <!-- Edit My Profil -->
-    <div class="modal fade" id="troka_identifikasaun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+
+    <!-- Aumenta Meza -->
+    <div class="modal fade" id="aumenta_meza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tebes hakarak sai?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Aumenta Meza</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -531,33 +634,112 @@ if ($get == 'profile') {
                 <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="row justify-content-md-center">
-                            <div class="col-md-7">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="naran_kompletu">Naran Kompletu:</label>
-                                    <input type="text" class="form-control" id="naran_kompletu" name="naran_kompletu" placeholder="- Naran Kompletu -">
+                                    <label for="nu_meza">Numeru Meza:</label>
+                                    <input type="number" class="form-control" id="nu_meza" name="nu_meza" placeholder="- Numeru Meza -" required>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="aumenta_meza">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Meza -->
+    <div class="modal fade" id="edit_meza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Meza</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="nu_meza">Numeru Meza:</label>
+                                    <input type="number" class="form-control" id="nu_meza" name="nu_meza" required>
+                                    <input type="hidden" class="form-control" id="id_meza" name="id_meza">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="edit_meza">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Meza -->
+    <div class="modal fade" id="delete_meza" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Hamos Membru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-12">
+                                <input type="hidden" id="id_meza" name="id_meza">
+                                <p>Tebes hakarak hamos Meza <b id="nu_meza"></b> ?</p>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                                <button type="submit" class="btn btn-danger" name="delete_meza">Sim</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php }
+if ($get == 'profile') {
+?>
+    <!-- Edit My Profil -->
+    <div class="modal fade" id="edit_profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hau nia Profile</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="naran_kompletu">Naran Kompletu:</label>
+                                    <input type="text" class="form-control" id="naran_kompletu" name="naran_kompletu">
+                                    <input type="hidden" class="form-control" id="id_identidade_pessoal" name="id_identidade_pessoal">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="sexo">Sexo:</label>
                                     <select class="form-control" id="sexo" name="sexo">
                                         <option selected hidden>- Sexo -</option>
-                                        <option value="M">M</option>
-                                        <option value="F">F</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="id_pozisaun">Pozisaun:</label>
-                                    <select class="form-control" id="id_pozisaun" name="id_pozisaun">
-                                        <?php
-                                        $pozisaun = $get_table->get_table("pozisaun");
-                                        echo '<option selected hidden>- Pozisaun -</option>';
-                                        foreach ($pozisaun as $loop) {
-                                            echo '<option value="' . $loop['id_pozisaun'] . '">' . $loop['pozisaun'] . '</option>';
-                                        }
-                                        ?>
+                                        <option value="M">Mane</option>
+                                        <option value="F">Feto</option>
                                     </select>
                                 </div>
                             </div>
@@ -566,26 +748,26 @@ if ($get == 'profile') {
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="data_moris">Data Moris:</label>
-                                    <input type="date" class="form-control" id="data_moris" name="data_moris" placeholder="- Data Moris -">
+                                    <input type="date" class="form-control" id="data_moris" name="data_moris">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="lovestory@gmail.com">
+                                    <input type="email" class="form-control" id="email" name="email">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nu_telemovel">Nu.Telf:</label>
-                                    <input type="text" class="form-control" id="nu_telemovel" name="nu_telemovel" placeholder="(+670) 78123123">
+                                    <input type="text" class="form-control" id="nu_telemovel" name="nu_telemovel">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
-                        <button type="submit" class="btn btn-success" name="aumenta_identidade">Rai</button>
+                        <button type="submit" class="btn btn-success" name="edit_profile">Rai</button>
                     </div>
                 </form>
             </div>
@@ -597,7 +779,7 @@ if ($get == 'profile') {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tebes hakarak sai?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Utilijador</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -614,7 +796,7 @@ if ($get == 'profile') {
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="password_atual">Password Atual:</label>
-                                    <input type="password" class="form-control" id="password_atual" name="password_atual">
+                                    <input type="password" class="form-control" id="password_atual" name="password_atual" required>
                                 </div>
                             </div>
                         </div>
@@ -622,13 +804,13 @@ if ($get == 'profile') {
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="password_foun">Password Foun:</label>
-                                    <input type="password" class="form-control" id="password_foun" name="password_foun">
+                                    <input type="password" class="form-control" id="password_foun" name="password_foun" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="konf_password">Konfirmasaun Password Foun:</label>
-                                    <input type="password" class="form-control" id="konf_password" name="konf_password">
+                                    <input type="password" class="form-control" id="konf_password" name="konf_password" required>
                                 </div>
                             </div>
                         </div>
@@ -642,7 +824,7 @@ if ($get == 'profile') {
         </div>
     </div>
 
-    <?php }
+<?php }
 if ($get == 'relatorio_jeral') {
 ?>
 
@@ -663,7 +845,7 @@ if ($get == 'relatorio_jeral') {
                                 <div class="form-group">
                                     <label for="naran_produtu">Osan sai: </label>
                                     <input type="text" class="form-control" id="osan_sai_js" name="osan_sai">
-                                    <input type="hidden" class="form-control" name="id_identidade_pessoal" value="<?= $_SESSION['id_identidade_pessoal']?>">
+                                    <input type="hidden" class="form-control" name="id_identidade_pessoal" >
                                     <!-- <input type="hidden" class="form-control" name="id_meza" id="id_meza"> -->
                                 </div>
                             </div>
@@ -679,6 +861,87 @@ if ($get == 'relatorio_jeral') {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
                         <button type="submit" class="btn btn-success" name="aumenta_gastu_kada_loron">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php }
+if ($get == 'relatorio_diaria_por_mensal') {
+?>
+
+    <!-- Modal Order Produtu -->
+    <div class="modal fade" id="aumenta_gastu_kada_loron_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Gastu Diariu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="controller/handler.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="naran_produtu">Osan sai: </label>
+                                    <input type="text" class="form-control" id="osan_sai_js" name="osan_sai">
+                                    <input type="hidden" class="form-control" name="id_identidade_pessoal" >
+                                    <!-- <input type="hidden" class="form-control" name="id_meza" id="id_meza"> -->
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="folin">Data:</label>
+                                    <input type="text" class="form-control" id="data_js" name="data" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="aumenta_gastu_kada_loron_2">Rai</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php }
+if ($get == 'detallu') {
+?>
+
+    <!-- Modal Order Produtu -->
+    <div class="modal fade" id="resibu_imprimi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Osan Selu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="../public/content/relatorio/tcpdf/pdf_resibu.php" method="POST" class="col p-4 position-static" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <!-- <label for="naran_produtu">Osan fo: </label> -->
+                                    <input type="text" class="form-control" name="osan_fo">
+                                    <input type="hidden" class="form-control" name="nu_meza" id="nu_meza_d">
+                                    <input type="hidden" class="form-control" name="data" id="data_d">
+                                    <input type="hidden" class="form-control" name="oras" id="oras_d">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kansela</button>
+                        <button type="submit" class="btn btn-success" name="aumenta_gastu_kada_loron_2">Rai</button>
                     </div>
                 </form>
             </div>

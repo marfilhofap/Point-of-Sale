@@ -22,10 +22,17 @@ $detallu = $get_table->get_table_uuid("", "relatorio", "nu_meza", $nu_meza, " an
             </div>
         </div>
         <div class="page-title-actions">
-            <a href="../public/content/relatorio/tcpdf/pdf_resibu.php?nu_meza=<?=$nu_meza?>&data=<?=$data?>&oras=<?=$oras?>" target="_blank">
+            <!-- <a href="../public/content/relatorio/tcpdf/pdf_resibu.php?nu_meza=<? //=$nu_meza
+                                                                                    ?>&data=<? //=$data
+                                                                                            ?>&oras=<? //=$oras
+                                                                                                    ?>" target="_blank">
                 <button type="button" data-toggle="tooltip" title="Imprimi Resibu" data-placement="bottom" class="btn-shadow mr-3 btn btn-primary">
                     Imprimi <i class="fa fa-print"></i>
-                </button>
+                </button> 
+            </a> -->
+
+            <a href="#" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal" data-target="#resibu_imprimi" data-nu_meza_d="<?= $nu_meza ?>" data-data_d="<?= $data ?>" data-oras_d="<?= $oras ?>">
+                Imprimi <i class="fa fa-print"></i>
             </a>
 
         </div>
@@ -62,7 +69,7 @@ $detallu = $get_table->get_table_uuid("", "relatorio", "nu_meza", $nu_meza, " an
                                 echo '<tr>
                                         <td class="text-center">' . $no++ . '</td>     
                                         <td class="text-center">' . $loop['naran_produtu'] . '</td>
-                                        <td class="text-center">' . $loop['folin'] . '</td>
+                                        <td class="text-center">$ ' . $loop['folin'] . '</td>
                                         <td class="text-center">' . $loop['kuantidade'] . '</td>
                                         <td class="text-center">$ ' . $loop['total'] . '</td>
                                     </tr>';
@@ -95,3 +102,22 @@ $detallu = $get_table->get_table_uuid("", "relatorio", "nu_meza", $nu_meza, " an
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#resibu_imprimi').on('show.bs.modal', function(event) {
+
+            var button = $(event.relatedTarget)
+
+            var nu_meza_d = button.data('nu_meza_d')
+            var data_d = button.data('data_d')
+            var oras_d = button.data('oras_d')
+            var modal = $(this)
+
+            modal.find('#nu_meza_d').val(nu_meza_d)
+            modal.find('#data_d').val(data_d)
+            modal.find('#oras_d').val(oras_d)
+
+        })
+    })
+</script>

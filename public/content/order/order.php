@@ -4,8 +4,10 @@ if (isset($_GET['m'])) {
     $id_meza = $_GET['m'];
     $kategoria = $get_table->get_table("kategoria order by kategoria ASC");
     $produtu_sira = $get_table->get_table("produtu order by naran_produtu ASC");
-    $meza = $get_table->get_table_uuid("", "transaksaun", "id_meza", $id_meza, " and tipu_transaksaun='Pendente'");
+    $pendente = $get_table->get_table_uuid("", "transaksaun", "id_meza", $id_meza, " and tipu_transaksaun='Pendente'");
 
+    foreach ($jestaun_sira as $loop) {
+        if ($loop['id_jestaun'] == '650a2e7d-80f0-4f03-bef7-abd0731da275') { 
 ?>
     <div class="app-page-title">
         <div class="page-title-wrapper">
@@ -28,7 +30,7 @@ if (isset($_GET['m'])) {
                     </span>
                     Order sira
                     <span class="badge badge-pill badge-light">
-                        <?= count($meza) ?>
+                        <?= count($pendente) ?>
                     </span>
                     </a>
                 </button>
@@ -71,11 +73,11 @@ if (isset($_GET['m'])) {
                                 <div class="row">';
                             foreach ($produtu as $loops) {
                                 $id_produtu = $loops['id_produtu'];
-                                $naran_produtu = $loops['naran_produtu'];
+                                $naran_produtu = $loops['naran_produtu']; 
                                 $folin = $loops['folin'];
                                 echo '<div class="col-xl-3 col-md-6 mb-4"  data-toggle="modal" data-target="#order_produtu_js" data-id_produtu="' . $id_produtu . '" data-naran_produtu="' . $naran_produtu . '" data-folin="' . $folin . '" data-id_meza="' . $id_meza . '">
                                     <div class="card border-left-primary shadow py-2">
-                                        <div class="card-body">
+                                        <div class="card-body"> 
                                             <a href="#" class="text-decoration-none" data-toggle="modal">
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col mr-2">
@@ -103,13 +105,20 @@ if (isset($_GET['m'])) {
 
                 <div class="d-block text-center card-footer">
                     <!-- javascript:void(0); -->
-                    <a href="#" class="btn-wide btn-shadow btn btn-danger">Remata</a>
+                    <a href="<?php 
+                    if (count($pendente) > 0 ){
+                        echo '?c=pendente&m='.$id_meza;
+                    } else {
+                        echo '?c=meza_sira';
+                    } ?>" class="btn-wide btn-shadow btn btn-danger">Remata</a>
                 </div>
             </div>
         </div>
     </div>
 
-<?php } ?>
+<?php }
+    }
+} ?>
 
 <script>
     $(document).ready(function() {

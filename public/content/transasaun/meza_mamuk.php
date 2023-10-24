@@ -1,5 +1,8 @@
 <?php
 $meza_mamuk = $get_table->get_table("view_meza_mamuk");
+
+foreach ($jestaun_sira as $loop) {
+    if ($loop['id_jestaun'] == 'e607497b-e6c7-4d2b-9478-48558f043a0e') {
 ?>
 
 <div class="app-page-title">
@@ -15,11 +18,11 @@ $meza_mamuk = $get_table->get_table("view_meza_mamuk");
                 </div>
             </div>
         </div>
-        <!-- <div class="page-title-actions">
-            <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-primary">
+        <div class="page-title-actions">
+            <button type="button" class="btn-shadow mr-3 btn btn-primary" data-toggle="modal" data-target="#aumenta_meza">
                 Aumenta <i class="fa fa-plus"></i>
             </button>
-        </div> -->
+        </div>
     </div>
 </div>
 
@@ -45,10 +48,10 @@ $meza_mamuk = $get_table->get_table("view_meza_mamuk");
                                         <td class="text-center">' . $loop['nu_meza'] . '</td>
                                         <td>
                                             <div class="d-flex justify-content-center flex-shrink-0">
-                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" target="_blank">
+                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#edit_meza" data-id_meza="' . $loop['id_meza'] . '" data-nu_meza="' . $loop['nu_meza'] . '">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#hamos_materia" data-nu_meza="' . $loop['nu_meza'] . '">
+                                                <a href="#" class="btn btn-sm btn-light btn-active-primary" data-toggle="modal" data-target="#delete_meza" data-id_meza="' . $loop['id_meza'] . '" data-nu_meza="' . $loop['nu_meza'] . '">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </div>
@@ -70,3 +73,33 @@ $meza_mamuk = $get_table->get_table("view_meza_mamuk");
         </div>
     </div>
 </div>
+
+<?php } 
+    }
+?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#delete_meza').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id_meza = button.data('id_meza')
+            var nu_meza = button.data('nu_meza')
+
+            var modal = $(this)
+            modal.find('#id_meza').val(id_meza)
+            modal.find('#nu_meza').text(nu_meza)
+
+        })
+
+        $('#edit_meza').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id_meza = button.data('id_meza')
+            var nu_meza = button.data('nu_meza')
+
+            var modal = $(this)
+            modal.find('#id_meza').val(id_meza)
+            modal.find('#nu_meza').val(nu_meza)
+
+        })
+    })
+</script>

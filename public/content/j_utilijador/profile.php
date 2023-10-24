@@ -31,7 +31,7 @@ $profile = $get_table->get_table_uuid("", "view_identidade_pessoal", "id_membru"
                                             <tr>
                                                 <th width="30%">Sexu</th>
                                                 <td width="2%">:</td>
-                                                <td><?= $loop['sexo'] = 'M' ? 'Mane' : 'Feto' ?></td>
+                                                <td><?= $loop['sexo'] == 'M' ? 'Mane' : 'Feto' ?></td>
                                             </tr>
                                             <tr>
                                                 <th width="30%">Data Moris</th>
@@ -55,7 +55,7 @@ $profile = $get_table->get_table_uuid("", "view_identidade_pessoal", "id_membru"
                                             </tr>
                                         </table>
                                         <div class="row justify-content-center">
-                                            <button type="button" class="btn-shadow mr-3 btn btn-danger text-white" data-toggle="modal" data-target="#troka_identifikasaun">
+                                            <button type="button" class="btn-shadow mr-3 btn btn-danger text-white" data-toggle="modal" data-target="#edit_profile" data-id_identidade_pessoal="<?= $loop['id_identidade_pessoal'] ?>" data-naran_kompletu="<?= $loop['naran_kompletu'] ?>" data-sexo="<?= $loop['sexo'] ?>" data-data_moris="<?= $loop['data_moris'] ?>" data-email="<?= $loop['email'] ?>" data-nu_telemovel="<?= $loop['nu_telemovel'] ?>">
                                                 <i class="fa fa-pen"></i> Alterar
                                             </button>
                                         </div>
@@ -80,6 +80,22 @@ $profile = $get_table->get_table_uuid("", "view_identidade_pessoal", "id_membru"
                                                 <td width="2%">:</td>
                                                 <td>********</td>
                                             </tr>
+                                            <tr>
+
+                                                <?php
+                                                if (isset($_GET['r'])) {
+                                                    $r = $_GET['r'];
+                                                    if ($r == 1) {
+                                                        echo '<th width="100%" colspan="3" class="text-success">Parabens, Password troka ho Susesu !</th>';
+                                                    } else if ($r == 2) {
+                                                        echo '<th width="100%" colspan="3" class="text-danger">Deskulpa, Password atual la los !</th>';
+                                                    } else if ($r == 3) {
+                                                        echo '<th width="100%" colspan="3" class="text-danger">Deskulpa, konfirmasaun password lalos !</th>';
+                                                    }
+                                                }
+                                                ?>
+                                                </th>
+                                            </tr>
                                         </table>
                                         <div class="row justify-content-center">
                                             <button type="button" class="btn-shadow mr-3 btn btn-danger text-white" data-toggle="modal" data-target="#troka_password">
@@ -98,3 +114,28 @@ $profile = $get_table->get_table_uuid("", "view_identidade_pessoal", "id_membru"
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function() {
+        $('#edit_profile').on('show.bs.modal', function(event) {
+
+            var button = $(event.relatedTarget)
+
+            var id_identidade_pessoal = button.data('id_identidade_pessoal')
+            var naran_kompletu = button.data('naran_kompletu')
+            var sexo = button.data('sexo')
+            var data_moris = button.data('data_moris')
+            var email = button.data('email')
+            var nu_telemovel = button.data('nu_telemovel')
+            var modal = $(this)
+
+            modal.find('#id_identidade_pessoal').val(id_identidade_pessoal)
+            modal.find('#naran_kompletu').val(naran_kompletu)
+            modal.find('#sexo').val(sexo)
+            modal.find('#data_moris').val(data_moris)
+            modal.find('#email').val(email)
+            modal.find('#nu_telemovel').val(nu_telemovel)
+
+        })
+    })
+</script>

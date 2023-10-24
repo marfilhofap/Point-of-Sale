@@ -37,16 +37,18 @@ class j_membru
         $sql->bindParam(":id_kategoria", $id_kategoria);
         $sql->execute();
 
-        $id_produtu = $sql->fetchColumn();
+        if(count($tamanhu) > 10){
+            $id_produtu = $sql->fetchColumn();
 
-        $sql2 = $this->conn->prepare("INSERT INTO imajem (binariu, naran_img, tipu, tamanhu, id_ligasaun) 
-        VALUES (:binariu, :naran_img, :tipu, :tamanhu, :id_ligasaun)");
-        $sql2->bindParam(":binariu", $binariu);
-        $sql2->bindParam(":naran_img", $naran_img);
-        $sql2->bindParam(":tipu", $tipu);
-        $sql2->bindParam(":tamanhu", $tamanhu);
-        $sql2->bindParam(":id_ligasaun", $id_produtu);
-        $sql2->execute();
+            $sql2 = $this->conn->prepare("INSERT INTO imajem (binariu, naran_img, tipu, tamanhu, id_ligasaun) 
+            VALUES (:binariu, :naran_img, :tipu, :tamanhu, :id_ligasaun)");
+            $sql2->bindParam(":binariu", $binariu);
+            $sql2->bindParam(":naran_img", $naran_img);
+            $sql2->bindParam(":tipu", $tipu);
+            $sql2->bindParam(":tamanhu", $tamanhu);
+            $sql2->bindParam(":id_ligasaun", $id_produtu);
+            $sql2->execute();
+        }
 
         return header("location: ../index.php?c=produtu_sira&id=$id_kategoria");
     }
@@ -63,11 +65,19 @@ class j_membru
         $check->execute();
         $resultadu = $check->fetchAll(PDO::FETCH_ASSOC);
 
-        if (count($resultadu) > 0) {
+        if (count($resultadu) > 0 && $tamanhu > 10) {
             $sql2 = "UPDATE imajem SET binariu = '$binariu', naran_img='$naran_img', tipu = '$tipu', tamanhu='$tamanhu' WHERE id_ligasaun = '$id_produtu'";
 
             $this->conn->exec($sql2);
-        } else {
+
+            $photoName = md5($id_produtu);
+            $photoPath = '../cache/'.$photoName.'.jpg';
+        
+            if (file_exists($photoPath)) {
+                unlink($photoPath);
+            }
+        
+        } else if (count($resultadu) == 0 & $tamanhu > 10) {
             $sql3 = $this->conn->prepare("INSERT INTO imajem (binariu, naran_img, tipu, tamanhu, id_ligasaun) 
                 VALUES (:binariu, :naran_img, :tipu, :tamanhu, :id_ligasaun)");
             $sql3->bindParam(":binariu", $binariu);
@@ -100,6 +110,14 @@ class j_membru
         return header("location: ../index.php?c=membru");
     }
 
+    public function edit_identidade($id_identidade_pessoal, $naran_kompletu, $sexo, $data_moris, $email, $nu_telemovel, $id_pozisaun)
+    {
+        $sql = "UPDATE identidade_pessoal SET naran_kompletu = '$naran_kompletu', sexo = '$sexo', data_moris = '$data_moris', email = '$email', nu_telemovel = '$nu_telemovel', id_pozisaun = '$id_pozisaun' WHERE id_identidade_pessoal = '$id_identidade_pessoal'";
+
+        $this->conn->exec($sql);
+        return header("location: ../index.php?c=membru");
+    }
+
     public function ativu_utilijador($id_identidade_pessoal)
     {
         $sql = "UPDATE utilijador SET estadu = 'Ativu' WHERE id_identidade_pessoal = '$id_identidade_pessoal'";
@@ -109,9 +127,18 @@ class j_membru
 
     public function dejativu_utilijador($id_identidade_pessoal)
     {
-        $sql = "UPDATE utilijador SET estadu = 'La Ativu' WHERE id_identidade_pessoal = '$id_identidade_pessoal'";
+        $pas = md5('password');
+        $sql = "UPDATE utilijador SET estadu = 'La Ativu', password = '$pas' WHERE id_identidade_pessoal = '$id_identidade_pessoal'";
 
         $this->conn->exec($sql);
+    }
+
+    public function edit_profile($id_identidade_pessoal, $naran_kompletu, $sexo, $data_moris, $email, $nu_telemovel)
+    {
+        $sql = "UPDATE identidade_pessoal SET naran_kompletu = '$naran_kompletu', sexo = '$sexo', data_moris = '$data_moris', email = '$email', nu_telemovel = '$nu_telemovel' WHERE id_identidade_pessoal = '$id_identidade_pessoal'";
+
+        $this->conn->exec($sql);
+        return header("location: ../index.php?c=profile");
     }
 
     public function troka_password($id_membru, $password_foun, $password_atual)
@@ -125,6 +152,10 @@ class j_membru
         if (count($resultadu) > 0) {
             $sql1 = "UPDATE utilijador SET password = '$password_foun' WHERE id_utilijador = '$id_utilijador'";
             $this->conn->exec($sql1);
+
+            return header("location: ../index.php?c=profile&r=1");
+        } else {
+            return header("location: ../index.php?c=profile&r=2&a=$id_membru");
         }
     }
 
@@ -224,7 +255,7 @@ class j_membru
 
         if (count($resultadu) < 1) {
             $que = $this->conn->prepare("INSERT into gastu_kada_loron (data, total_gastu, id_identidade_pessoal) 
-                        VALUES (data, :total_gastu, :id_identidade_pessoal)");
+                        VALUES (:data, :total_gastu, :id_identidade_pessoal)");
 
             $que->bindParam(":total_gastu", $osan_sai);
             $que->bindParam(":data", $data);
@@ -237,6 +268,25 @@ class j_membru
 
             $this->conn->exec($sql);
         }
-        return header("location: ../index.php?c=relatorio_jeral");
+    }
+
+    public function aumenta_meza($nu_meza)
+    {
+        $sql = $this->conn->prepare("INSERT into meza (nu_meza) 
+        VALUES (:nu_meza)");
+
+        $sql->bindParam(":nu_meza", $nu_meza);
+
+        $sql->execute();
+        return header("location: ../index.php?c=meza_mamuk");
+    }
+
+    public function edit_meza($id_meza, $nu_meza)
+    {
+        $sql = "UPDATE meza SET nu_meza = '$nu_meza' WHERE id_meza = '$id_meza'";
+
+        $this->conn->exec($sql);
+
+        return header("location: ../index.php?c=meza_mamuk");
     }
 }

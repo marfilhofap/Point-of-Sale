@@ -40,8 +40,13 @@ date_default_timezone_set('Asia/Dili');
     -->
 
     <link href="./main.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
+    <link rel="stylesheet" href="assets/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+    <script src="assets/scripts/chart.js"></script>
+    <script src="assets/scripts/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -65,5 +70,6 @@ date_default_timezone_set('Asia/Dili');
     <script type="text/javascript" src="./assets/scripts/main.js"></script>
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="assets/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
 
 </html>

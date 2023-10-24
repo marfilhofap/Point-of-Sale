@@ -1,11 +1,14 @@
 <?php
 $resibu = $get_table->get_table_uuid("", "resibu", "data", date('Y-m-d'), " order by oras_selu DESC");
+
+foreach ($jestaun_sira as $loop) {
+    if ($loop['id_jestaun'] == 'ad77e562-1004-4287-9f21-160829e7c621') {
 ?>
 <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon">
-                <i class="pe-7s-bookmarks icon-gradient bg-mean-fruit">
+                <i class="pe-7s-print icon-gradient bg-mean-fruit">
                 </i>
             </div>
             <div>Resibu
@@ -55,10 +58,10 @@ $resibu = $get_table->get_table_uuid("", "resibu", "data", date('Y-m-d'), " orde
                                         <a href="?c=detallu&nu_meza=' . $loop['nu_meza'] . '&data=' . $loop['data'] . '&oras=' . $loop['oras_selu'] . '" class="btn btn-sm btn-light btn-active-primary" >
                                             <i class="fas fa-info"></i>
                                         </a>';
-                                echo '<div class="d-flex justify-content-center flex-shrink-0">
-                                        <a href="../public/content/relatorio/tcpdf/pdf_resibu.php?nu_meza='.$loop['nu_meza'].'&data='.$loop['data'].'&oras='.$loop['oras_selu'].'" target="_blank" class="btn btn-sm btn-light btn-active-primary" >
-                                            <i class="fas fa-print"></i>
-                                        </a>';
+                                // echo '<div class="d-flex justify-content-center flex-shrink-0">
+                                //         <a href="../public/content/relatorio/tcpdf/pdf_resibu.php?nu_meza='.$loop['nu_meza'].'&data='.$loop['data'].'&oras='.$loop['oras_selu'].'" target="_blank" class="btn btn-sm btn-light btn-active-primary" >
+                                //             <i class="fas fa-print"></i>
+                                //         </a>';
                                 echo '</td>
                                     </tr>';
                             }
@@ -72,3 +75,7 @@ $resibu = $get_table->get_table_uuid("", "resibu", "data", date('Y-m-d'), " orde
         </div>
     </div>
 </div>
+
+<?php } 
+    }
+?>

@@ -4,6 +4,10 @@ include_once '../../config/parametros_db.php';
 include_once 'class.php';
 include_once 'get_table.php';
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 $class = new j_membru(PSQLHOST, PSQLUSER, PSQLPW, PSQLDB);
 $get_table = new gestaoTabelas(PSQLHOST, PSQLUSER, PSQLPW, PSQLDB);
 
@@ -69,11 +73,29 @@ if (isset($_POST['edit_produtu'])) {
             }
         } 
     } 
-
+ 
     $edit_status = $class->edit_produtu($id_produtu, $id_kategoria, $naran_produtu, $folin, $binariu, $naran_img, $tipu, $tamanhu);
 }
 
-// Identificacao
+if (isset($_POST['delete_produtu'])) {
+    $tabela = 'produtu';
+    $id = 'id_produtu';
+    $id_dados = $_POST['id_produtu'];
+    $id_cat = $_POST['id_kategoria'];
+
+    $update_status = $class->delete($tabela, $id, $id_dados);
+
+    $tabela1 = 'imajem';
+    $id1 = 'id_ligasaun';
+    $id_dados1 = $_POST['id_produtu'];
+
+    $delete_status = $class->delete($tabela1, $id1, $id_dados1);
+
+    // imajem
+    return header("location: ../index.php?c=produtu_sira&id=$id_cat");
+}
+
+// Utilijador
 if (isset($_POST['aumenta_identidade'])) {
     $naran_kompletu = $_POST['naran_kompletu'];
     $sexo = $_POST['sexo'];
@@ -86,6 +108,18 @@ if (isset($_POST['aumenta_identidade'])) {
     $id_membru = 'LS-' . $konta;
 
     $insert_status = $class->aumenta_identidade($naran_kompletu, $sexo, $id_pozisaun, $data_moris, $email, $nu_telemovel, $id_membru);
+}
+
+if (isset($_POST['edit_identidade'])) {
+    $id_identidade_pessoal = $_POST['id_identidade_pessoal'];
+    $naran_kompletu = $_POST['naran_kompletu'];
+    $sexo = $_POST['sexo'];
+    $data_moris = $_POST['data_moris'];
+    $email = $_POST['email'];
+    $nu_telemovel = $_POST['nu_telemovel'];
+    $id_pozisaun = $_POST['id_pozisaun'];
+
+    $insert_status = $class->edit_identidade($id_identidade_pessoal, $naran_kompletu, $sexo, $data_moris, $email, $nu_telemovel, $id_pozisaun);
 }
 
 if (isset($_POST['ativu_utilijador'])) {
@@ -102,28 +136,41 @@ if (isset($_POST['dejativu_utilijador'])) {
     return header("location: ../index.php?c=membru");
 }
 
-if (isset($_POST['hamos_identidade'])) {
+if (isset($_POST['delete_identidade'])) {
+    $tabela = 'utilijador';
+    $id = 'id_identidade_pessoal';
+    $id_dados = $_POST['id_identidade_pessoal'];
+    $update_status = $class->delete($tabela, $id, $id_dados);
+    
     $tabela = 'identidade_pessoal';
     $id = 'id_identidade_pessoal';
     $id_dados = $_POST['id_identidade_pessoal'];
-
     $update_status = $class->delete($tabela, $id, $id_dados);
+
     return header("location: ../index.php?c=membru");
 }
 
-// Profile
+if (isset($_POST['edit_profile'])) {
+    $id_identidade_pessoal = $_POST['id_identidade_pessoal'];
+    $naran_kompletu = $_POST['naran_kompletu'];
+    $sexo = $_POST['sexo'];
+    $data_moris = $_POST['data_moris'];
+    $email = $_POST['email'];
+    $nu_telemovel = $_POST['nu_telemovel'];
+
+    $insert_status = $class->edit_profile($id_identidade_pessoal, $naran_kompletu, $sexo, $data_moris, $email, $nu_telemovel);
+}
 
 if(isset($_POST['troka_password'])){
-    $id_membru = $_POST['id_membru'];
+    $id_membru = $_SESSION['id_membru'];
     $password_foun = md5($_POST['password_foun']);
     $password_atual = md5($_POST['password_atual']);
     $konf_password = md5($_POST['konf_password']);
 
     if($password_foun == $konf_password){
     $insert_status = $class->troka_password($id_membru, $password_foun, $password_atual);
-    return header("location: ../index.php?c=profile");
     } else {
-        return header("location: ../index.php?c=profile&err=1");
+        return header("location: ../index.php?c=profile&r=3");
     }
 }
 
@@ -196,4 +243,39 @@ if (isset($_POST['aumenta_gastu_kada_loron'])) {
     $id_identidade_pessoal = $_POST['id_identidade_pessoal'];
 
     $insert_status = $class->aumenta_gastu_kada_loron($osan_sai, $data, $id_identidade_pessoal);
+    return header("location: ../index.php?c=relatorio_jeral");
 }
+
+if (isset($_POST['aumenta_gastu_kada_loron_2'])) {
+    $osan_sai = $_POST['osan_sai'];
+    $data = $_POST['data'];
+    $mes = date('m', strtotime($data));
+    $ano = date('Y', strtotime($data));
+    $id_identidade_pessoal = $_POST['id_identidade_pessoal'];
+
+    $insert_status = $class->aumenta_gastu_kada_loron($osan_sai, $data, $id_identidade_pessoal);
+    return header("location: ../index.php?c=relatorio_diaria_por_mensal&mes=$mes&ano=$ano");
+}
+
+// Aumenta Meza
+if (isset($_POST['aumenta_meza'])) {
+    $nu_meza = $_POST['nu_meza'];
+
+    $insert_status = $class->aumenta_meza($nu_meza);
+}
+
+if (isset($_POST['edit_meza'])) {
+    $id_meza = $_POST['id_meza'];
+    $nu_meza = $_POST['nu_meza'];
+
+    $insert_status = $class->edit_meza($id_meza, $nu_meza);
+}
+
+if (isset($_POST['delete_meza'])) {
+    $tabela = 'meza';
+    $id = 'id_meza';
+    $id_dados = $_POST['id_meza'];
+
+    $update_status = $class->delete($tabela, $id, $id_dados);
+    return header("location: ../index.php?c=meza_mamuk");
+} 

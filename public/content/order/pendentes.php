@@ -6,6 +6,8 @@ if (isset($_GET['m'])) {
     $produtu_sira = $get_table->get_table("produtu order by naran_produtu ASC");
     $pendente = $get_table->get_table_uuid("", "view_order_sira", "id_meza", $id_meza, " and tipu_transaksaun='Pendente' order by naran_produtu");
 
+    foreach ($jestaun_sira as $loop) {
+        if ($loop['id_jestaun'] == '650a2e7d-80f0-4f03-bef7-abd0731da275') { 
 ?>
     <div class="app-page-title">
         <div class="page-title-wrapper">
@@ -100,7 +102,10 @@ if (isset($_GET['m'])) {
     </div>
 
 
-<?php } ?>
+<?php }
+    }
+} 
+?>
 
 <script>
     $(document).ready(function() {
