@@ -1,7 +1,7 @@
 <?php
 include_once 'connection.php';
-// include_once '../../config/parametros_db.php';
-include_once '/xampp/htdocs/Point-of-Sale/config/parametros_db.php';
+include_once '/var/www/html/Point-of-Sale/config/parametros_db.php';
+// include_once '/xampp/htdocs/Point-of-Sale/config/parametros_db.php';
 
 class ControloAutenticacao
 {
@@ -55,7 +55,7 @@ class ControloAutenticacao
     }
 
     public function image_cache($id_ligasaun)
-    { 
+    {
         $imajem = md5($id_ligasaun) . '.jpg';
         if (!file_exists('cache/' . $imajem)) {
 
@@ -70,7 +70,7 @@ class ControloAutenticacao
                 $target = 'cache/imajem_seluk.jpg';
                 // $link = 'cache/' . $imajem;
                 // symlink($target, $link);
-                echo '<img src="'. $target . '" alt="Imajem" style="width: 100px;">';
+                echo '<img src="' . $target . '" alt="Imajem" style="width: 100px;">';
             } else {
                 $foto = $arquivo["binariu"];
                 $a = pg_unescape_bytea($foto);
