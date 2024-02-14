@@ -1,1 +1,1 @@
-# Point-of-Salve
+# Point-of-Sale
